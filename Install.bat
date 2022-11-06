@@ -66,10 +66,10 @@ echo "----------------------------------------------------------------"
 echo "                        Choose Options                          "
 echo "----------------------------------------------------------------"
 echo.
-echo 1. Activate Windows 10 (https://massgrave.dev/get)
-echo 2. ChrisTitusTech's Programs Install Manager (https://christitus.com/win)
-echo 3. Install Winget Alone
-echo 4. Enable/Disable Windows AutoLogin (Not Entirely Safe but sure)
+echo 1. Activate Windows 10				(https://massgrave.dev/get)
+echo 2. ChrisTitusTech's Programs Install Manager	(https://github.com/ChrisTitusTech/winutil)
+echo 3. Standalone Winget Install			(https://christitus.com/installing-appx-without-msstore/)
+echo 4. Enable/Disable Windows AutoLogin		(Not Entirely Safe but sure)
 echo 0. Exit
 echo.
 
