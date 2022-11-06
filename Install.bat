@@ -69,16 +69,18 @@ echo.
 echo 1. Activate Windows 10 (https://massgrave.dev/get)
 echo 2. ChrisTitusTech's Programs Install Manager (https://christitus.com/win)
 echo 3. Install Winget Alone
+echo 4. Enable/Disable Windows AutoLogin (Not Entirely Safe but sure)
 echo 0. Exit
 echo.
 
 
-echo Enter choice in your keyboard [1,2,3,0]: 
-choice /C:1230 /N
+echo Enter choice in your keyboard [1,2,3,4,0]: 
+choice /C:12340 /N
 set _erl=%errorlevel%
 
 
 if %_erl%==0 goto end
+if %_erl%==4 goto wal
 if %_erl%==3 goto wg
 if %_erl%==2 goto ctt
 if %_erl%==1 goto mass
@@ -110,6 +112,79 @@ cls
 %ps%winget-install.ps1"
 pause
 goto start
+
+
+:wal
+cls
+
+echo "----------------------------------------------------------------"
+echo "                        Windows AutoLogon                       "
+echo "----------------------------------------------------------------"
+echo.
+echo 1. Enable Windows AutoLogon
+echo 2. Disable Windows AutoLogon
+echo 3. Go Back
+echo 0. Exit
+
+echo Enter choice in your keyboard [1,2,3,0]: 
+choice /C:1230 /N
+set _erl_wal=%errorlevel%
+
+if %_erl_wal%==0 goto end
+if %_erl_wal%==3 goto start
+if %_erl_wal%==2 goto dis_wal
+if %_erl_wal%==1 goto en_wal
+
+goto end
+
+:en_wal
+cls
+echo Enabling Windows AutoLogon
+echo.
+echo Please Input Parameters
+
+set /P wal_user=Enter Windows Username:
+set /P wal_pass=Enter Windows Password:
+
+ping 127.0.0.1 -n 2 -w 3000 > NUL
+cls
+echo Please Wait
+echo.
+
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d %wal_user%
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d %wal_pass%
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1
+
+ping 127.0.0.1 -n 2 -w 4000 > NUL
+echo DONE!
+pause
+goto start
+
+
+
+:dis_wal
+cls
+echo Disabling Windows AutoLogon
+
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 0
+
+ping 127.0.0.1 -n 2 -w 3000 > NUL
+echo DONE!
+pause
+goto start
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
