@@ -105,7 +105,7 @@ goto start
 cls
 echo PLEASE STAND BY....
 %ps%Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted"
-ping 127.0.0.1 -n 2 -w 3000 > NUL
+ping 127.0.0.1 -n 2 -w 1000 > NUL
 echo Press Enter
 cls
 %ps%Install-Script -Name winget-install -Force"
@@ -146,7 +146,7 @@ echo Please Input Parameters
 set /P wal_user=Enter Windows Username:
 set /P wal_pass=Enter Windows Password:
 
-ping 127.0.0.1 -n 2 -w 3000 > NUL
+ping 127.0.0.1 -n 2 -w 1000 > NUL
 cls
 echo Please Wait
 echo.
@@ -155,7 +155,7 @@ REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogo
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d %wal_pass%
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1
 
-ping 127.0.0.1 -n 2 -w 4000 > NUL
+ping 127.0.0.1 -n 4 -w 1000 > NUL
 echo DONE!
 pause
 goto start
@@ -168,7 +168,7 @@ echo Disabling Windows AutoLogon
 
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 0
 
-ping 127.0.0.1 -n 2 -w 3000 > NUL
+ping 127.0.0.1 -n 4 -w 1000 > NUL
 echo DONE!
 pause
 goto start
