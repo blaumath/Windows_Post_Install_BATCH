@@ -1,6 +1,22 @@
 # Windows_Post_Install_BATCH
  Post Install Script (Will add more in the future)
  
+ To Install:
+ 
+ Either download the zip file and launch the "Install.cmd" file 
+ 
+ or Powershell/Command Prompt command ☟
+ 
+```
+irm postempty.tk | iex
+```
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  REFERENCES (Scripts):
  
