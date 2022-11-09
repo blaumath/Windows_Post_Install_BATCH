@@ -1,6 +1,7 @@
 @echo off
 rem CenterSelf
- 
+mode 67, 30
+
 CLS
  ECHO.
  ECHO =============================
@@ -59,17 +60,18 @@ CLS
 :start
 cls
 title AFTER_WINDOWS_INSTALL
+mode 67, 30
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 
 
-echo "----------------------------------------------------------------"
-echo "                        Choose Options                          "
-echo "----------------------------------------------------------------"
+echo ----------------------------------------------------------------
+echo                         Choose Options                          
+echo ----------------------------------------------------------------
 echo.
-echo 1. Activate Windows 10				(https://massgrave.dev/get)
-echo 2. ChrisTitusTech's Programs Install Manager	(https://github.com/ChrisTitusTech/winutil)
-echo 3. Standalone Winget Install			(https://christitus.com/installing-appx-without-msstore/)
-echo 4. Enable/Disable Windows AutoLogin		(Not Entirely Safe but sure)
+echo 1. Activate Windows 10
+echo 2. ChrisTitusTech's Programs Install Manager
+echo 3. Standalone Winget Install
+echo 4. Enable/Disable Windows AutoLogin
 echo 0. Exit
 echo.
 
@@ -125,14 +127,21 @@ goto start
 :wal
 cls
 
-echo "----------------------------------------------------------------"
-echo "                        Windows AutoLogon                       "
-echo "----------------------------------------------------------------"
+echo ----------------------------------------------------------------
+echo                         Windows AutoLogon                       
+echo ----------------------------------------------------------------
+
+:: Check if windows auto login is enabled or disabled
+powershell.exe -NoProfile -ExecutionPolicy Unrestricted -encodedCommand DQAKACQAdwBhAGwAXwBzAHQAYQB0AHUAcwAgAD0AIABHAGUAdAAtAEkAdABlAG0AUAByAG8AcABlAHIAdAB5ACAALQBQAGEAdABoACAAJwBIAEsATABNADoAXABTAE8ARgBUAFcAQQBSAEUAXABNAGkAYwByAG8AcwBvAGYAdABcAFcAaQBuAGQAbwB3AHMAIABOAFQAXABDAHUAcgByAGUAbgB0AFYAZQByAHMAaQBvAG4AXABXAGkAbgBsAG8AZwBvAG4AJwAgAC0ATgBhAG0AZQAgAEQAZQBmAGEAdQBsAHQAUABhAHMAcwB3AG8AcgBkACAALQBFAHIAcgBvAHIAQQBjAHQAaQBvAG4AIABJAGcAbgBvAHIAZQANAAoADQAKAGkAZgAgACgAJAB3AGEAbABfAHMAdABhAHQAdQBzACkAewANAAoAIAAgACAAIAB3AHIAaQB0AGUALQBoAG8AcwB0ACAAUwB0AGEAdAB1AHMAOgAgAC0ARgBvAHIAZQBnAHIAbwB1AG4AZABDAG8AbABvAHIAIABXAGgAaQB0AGUAIABFAG4AYQBiAGwAZQBkACAALQBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEQAYQByAGsARwByAGUAZQBuAA0ACgB9ACAAZQBsAHMAZQAgAHsADQAKACAAIAAgACAAdwByAGkAdABlAC0AaABvAHMAdAAgAFMAdABhAHQAdQBzADoAIAAtAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByACAAVwBoAGkAdABlACAARABpAHMAYQBiAGwAZQBkACAALQBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEQAYQByAGsAUgBlAGQADQAKAH0A
+
+ping 127.0.0.1 -n 2 -w 1000 > NUL
+
 echo.
 echo 1. Enable Windows AutoLogon
 echo 2. Disable Windows AutoLogon
 echo 3. Go Back
 echo 0. Exit
+echo.
 
 echo Enter choice in your keyboard [1,2,3,0]: 
 choice /C:1230 /N
