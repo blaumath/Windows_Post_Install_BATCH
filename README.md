@@ -5,7 +5,7 @@
  
 Either download the zip file and launch the "Install.cmd" file 
  
-or Powershell/Command Prompt command ☟
+or usind the Powershell/Command Prompt command ☟
 
 <details><summary>Command</summary>
 <p>
