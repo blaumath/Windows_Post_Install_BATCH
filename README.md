@@ -5,9 +5,9 @@
  
 Either download the zip file and launch the "Install.cmd" file 
  
-or Powershell/Command Prompt command ☟
+or using the Powershell/Command Prompt command ☟
 
-<details><summary>Command</summary>
+<details><summary>Command (Click Me)</summary>
 <p>
 
 ```
