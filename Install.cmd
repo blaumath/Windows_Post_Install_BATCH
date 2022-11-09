@@ -150,9 +150,17 @@ cls
 echo Enabling Windows AutoLogon
 echo.
 echo Please Input Parameters
+echo [*LOGIN DETAILS WILL BE IN PLAIN TEXT IN THE REGISTRY*]
+echo.
+set /P wal_user=Enter Windows Username: 
 
-set /P wal_user=Enter Windows Username:
-set /P wal_pass=Enter Windows Password:
+:: Credits https://correct-log.com/en/bat_input_mask_with_powershell/
+set "pscmd=powershell.exe -Command " ^
+$inputPass = read-host 'Enter Windows Password' -AsSecureString ; ^
+$BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($inputPass); ^
+[System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)""
+
+for /f "tokens=*" %%a in ('%pscmd%') do set wal_pass=%%a
 
 ping 127.0.0.1 -n 2 -w 1000 > NUL
 cls
