@@ -1,5 +1,16 @@
 # Windows_Post_Install_BATCH
 ~~Post Install Script (Will add more in the future)~~ (Maybe)
+
+## Disclaimer!
+As of right now, an **INTERNET Connection** is required for this script to run properly. 
+
+Will have a fully offline version down the road.
+
+TASKLIST:
+
+- [x] Script Creation
+- [x] IRM Version for using in terminal 
+- [ ] Offline Install Version
  
 ## Installation
  
