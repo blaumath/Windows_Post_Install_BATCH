@@ -23,7 +23,9 @@ or using the Powershell/Command Prompt command ☟
 
 ```
 irm post.8mpty.xyz | iex
+```
 or
+```
 irm https://post.8mpty.xyz | iex
 ```
 
