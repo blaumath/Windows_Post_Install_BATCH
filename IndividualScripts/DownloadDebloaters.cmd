@@ -62,9 +62,10 @@ echo INSTALLING CHOCO IF NOT INSTALLED
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
 echo PLEASE WAIT
-ping 127.0.0.1 -n 5 -w 1000 > NUL
+ping 127.0.0.1 -n 3 -w 1000 > NUL
 echo.
 
+cls
 echo INSTALLING WGET
 choco install wget
 ping 127.0.0.1 -n 3 -w 1000 > NUL
@@ -87,8 +88,16 @@ goto extract_download_files
 :extract_download_files
 cls
 echo EXTRACTING....
-tar -xf %UserProfile%\Downloads\builtbybel.zip -C %UserProfile%\Downloads\bloatbox
-tar -xf %UserProfile%\Downloads\Sycnex.zip -C %UserProfile%\Downloads\Windows10Debloater
+
+WHERE tar > NUL
+IF %ERRORLEVEL% NEQ 0 (
+	powershell -command "Expand-Archive -Force '%UserProfile%\Downloads\builtbybel.zip' '%UserProfile%\Downloads\bloatbox'
+	powershell -command "Expand-Archive -Force '%UserProfile%\Downloads\Sycnex.zip' '%UserProfile%\Downloads\Windows10Debloater'
+) ELSE IF %ERRORLEVEL% NEQ 1 (
+	tar -xf %UserProfile%\Downloads\builtbybel.zip -C %UserProfile%\Downloads\bloatbox
+	tar -xf %UserProfile%\Downloads\Sycnex.zip -C %UserProfile%\Downloads\Windows10Debloater
+)
+
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 del /f %UserProfile%\Downloads\builtbybel.zip
 del /f %UserProfile%\Downloads\Sycnex.zip

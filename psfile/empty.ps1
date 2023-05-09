@@ -5,7 +5,7 @@ $MainURL = "https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/m
 $MainPath = "$env:TEMP\POST_TEMP"
 
 if(!(Test-Path $MainPath)){
-    md -Force $MainPath
+    md -Force $MainPath | Out-Null
 }
 
 $DownloadURL = "$MainURL/Install.cmd"
