@@ -20,12 +20,12 @@ $MainPath = "$env:TEMP\POST_TEMP"
 
 # Set PATHS
 $InstallPath = "$MainPath\Post_Install.cmd"
-$ActivatorFilePath = "$MainPath\Activator.cmd"
-$TweakerFilePath = "$MainPath\Tweaker.cmd"
-$WingetFilePath = "$MainPath\Winget.cmd"
-$AutoLoginFilePath = "$MainPath\AutoLogin.cmd"
-$DriversFilePath = "$MainPath\Drivers.cmd"
-$DebloaterFilePath = "$MainPath\Debloaters.cmd"
+$ActivatorFilePath = "$MainPath\ActivateWindows.cmd"
+$TweakerFilePath = "$MainPath\ChrisTitusTweaker.cmd"
+$WingetFilePath = "$MainPath\StandaloneWinget.cmd"
+$AutoLoginFilePath = "$MainPath\WindowsAutoLogin.cmd"
+$DriversFilePath = "$MainPath\ExtractDrivers.cmd"
+$DebloaterFilePath = "$MainPath\DownloadDebloaters.cmd"
 
 
 try {

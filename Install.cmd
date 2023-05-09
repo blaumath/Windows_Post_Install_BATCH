@@ -60,7 +60,13 @@ CLS
 :start
 title (TESTING_BRANCH) AFTER_WINDOWS_INSTALL
 mode 67, 30
-cd /D %temp%/POST_TEMP/
+
+IF NOT EXIST %temp%\POST_TEMP\ (
+	cd ./IndividualScripts/
+)else (
+	cd /D %temp%/POST_TEMP/
+)
+
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 
 echo ----------------------------------------------------------------
@@ -94,32 +100,32 @@ goto end
 
 :mass
 cls
-call Activator.cmd
+call ActivateWindows.cmd
 goto start
 
 :ctt
 cls
-call Tweaker.cmd
+call ChrisTitusTweaker.cmd
 goto start
 
 :wg
 cls
-call Winget.cmd
+call StandaloneWinget.cmd
 goto start
 
 :wal
 cls
-call AutoLogin.cmd
+call WindowsAutoLogin.cmd
 goto start
 
 
 :ext_driver
-call Drivers.cmd
+call ExtractDrivers.cmd
 goto start
 
 
 :download_debloaters
-call Debloaters.cmd
+call DownloadDebloaters.cmd
 goto start
 
 
