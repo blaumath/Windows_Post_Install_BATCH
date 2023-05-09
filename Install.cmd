@@ -59,7 +59,7 @@ CLS
 
 :start
 cls
-title AFTER_WINDOWS_INSTALL
+title (TESTING_BRANCH) AFTER_WINDOWS_INSTALL
 mode 67, 30
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 
@@ -95,7 +95,7 @@ goto end
 
 :mass
 cls
-call ActivateWindows.cmd
+call ./IndividualScripts/ActivateWindows.cmd
 goto start
 
 
