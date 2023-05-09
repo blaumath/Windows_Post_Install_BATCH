@@ -12,6 +12,7 @@ $ActivatorFilePath = "$env:TEMP\Activator.cmd"
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $FilePath
+    Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $ActivatorFilePath
 } catch {
     Write-Error $_
 	Return
