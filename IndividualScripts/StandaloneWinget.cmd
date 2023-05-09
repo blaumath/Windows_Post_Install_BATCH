@@ -2,6 +2,7 @@
 
 
 cls
+title Standalone Winget Install (FROM INDIVIDUAL FOLDER)
 echo PLEASE STAND BY....
 
 %ps%Set-ExecutionPolicy Unrestricted -Scope CurrentUser"
