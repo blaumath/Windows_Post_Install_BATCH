@@ -1,4 +1,6 @@
 @echo off
+rem CenterSelf
+mode 67, 30
 
 CLS
  ECHO.
@@ -57,6 +59,7 @@ CLS
 
 :wal_start
 cls
+
 echo ----------------------------------------------------------------
 echo                         Windows AutoLogon                       
 echo ----------------------------------------------------------------
@@ -109,10 +112,10 @@ REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogo
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
 
 ping 127.0.0.1 -n 4 -w 1000 > NUL
-echo.
 echo DONE!
 pause
 goto wal_start
+
 
 
 :dis_wal
@@ -125,7 +128,10 @@ REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winl
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 0 /f
 
 ping 127.0.0.1 -n 4 -w 1000 > NUL
-echo.
 echo DONE!
 pause
 goto wal_start
+
+:end
+exit /b
+

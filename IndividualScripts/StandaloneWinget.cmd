@@ -1,4 +1,6 @@
 @echo off
+rem CenterSelf
+mode 67, 30
 CLS
  ECHO.
  ECHO =============================
@@ -73,3 +75,4 @@ ping 127.0.0.1 -n 2 -w 1000 > NUL
 
 %ps%winget-install.ps1"
 ping 127.0.0.1 -n 2 -w 1000 > NUL
+pause

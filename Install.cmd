@@ -58,9 +58,9 @@ CLS
  REM Run shell as admin (example) - put here code as you like
 
 :start
-cls
 title (TESTING_BRANCH) AFTER_WINDOWS_INSTALL
 mode 67, 30
+cd /D %temp%/POST_TEMP/
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 
 echo ----------------------------------------------------------------
@@ -94,168 +94,33 @@ goto end
 
 :mass
 cls
-cd /D %temp%/Post/Activator.cmd
 call Activator.cmd
 goto start
 
-
 :ctt
 cls
-cd /D %temp%/Post/Tweaker.cmd
 call Tweaker.cmd
 goto start
 
-
 :wg
 cls
-call StandaloneWinget.cmd
-pause
+call Winget.cmd
 goto start
-
 
 :wal
 cls
-
-echo ----------------------------------------------------------------
-echo                         Windows AutoLogon                       
-echo ----------------------------------------------------------------
-
-:: Check if windows auto login is enabled or disabled
-powershell.exe -NoProfile -ExecutionPolicy Unrestricted -encodedCommand DQAKACQAdwBhAGwAXwBzAHQAYQB0AHUAcwAgAD0AIABHAGUAdAAtAEkAdABlAG0AUAByAG8AcABlAHIAdAB5ACAALQBQAGEAdABoACAAJwBIAEsATABNADoAXABTAE8ARgBUAFcAQQBSAEUAXABNAGkAYwByAG8AcwBvAGYAdABcAFcAaQBuAGQAbwB3AHMAIABOAFQAXABDAHUAcgByAGUAbgB0AFYAZQByAHMAaQBvAG4AXABXAGkAbgBsAG8AZwBvAG4AJwAgAC0ATgBhAG0AZQAgAEQAZQBmAGEAdQBsAHQAUABhAHMAcwB3AG8AcgBkACAALQBFAHIAcgBvAHIAQQBjAHQAaQBvAG4AIABJAGcAbgBvAHIAZQANAAoADQAKAGkAZgAgACgAJAB3AGEAbABfAHMAdABhAHQAdQBzACkAewANAAoAIAAgACAAIAB3AHIAaQB0AGUALQBoAG8AcwB0ACAAUwB0AGEAdAB1AHMAOgAgAC0ARgBvAHIAZQBnAHIAbwB1AG4AZABDAG8AbABvAHIAIABXAGgAaQB0AGUAIABFAG4AYQBiAGwAZQBkACAALQBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEQAYQByAGsARwByAGUAZQBuAA0ACgB9ACAAZQBsAHMAZQAgAHsADQAKACAAIAAgACAAdwByAGkAdABlAC0AaABvAHMAdAAgAFMAdABhAHQAdQBzADoAIAAtAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByACAAVwBoAGkAdABlACAARABpAHMAYQBiAGwAZQBkACAALQBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEQAYQByAGsAUgBlAGQADQAKAH0A
-
-ping 127.0.0.1 -n 2 -w 1000 > NUL
-
-echo.
-echo 1. Enable Windows AutoLogon
-echo 2. Disable Windows AutoLogon
-echo 3. Go Back
-echo 0. Exit
-echo.
-
-echo Enter choice in your keyboard [1,2,3,0]: 
-choice /C:1230 /N
-set _erl_wal=%errorlevel%
-
-if %_erl_wal%==0 goto end
-if %_erl_wal%==3 goto start
-if %_erl_wal%==2 goto dis_wal
-if %_erl_wal%==1 goto en_wal
-
-goto end
-
-:en_wal
-cls
-echo Enabling Windows AutoLogon
-echo.
-echo Please Input Parameters
-echo [*LOGIN DETAILS WILL BE IN PLAIN TEXT IN THE REGISTRY*]
-echo.
-set /P wal_user=Enter Windows Username: 
-
-:: Credits https://correct-log.com/en/bat_input_mask_with_powershell/
-set "pscmd=powershell.exe -Command " ^
-$inputPass = read-host 'Enter Windows Password' -AsSecureString ; ^
-$BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($inputPass); ^
-[System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)""
-
-for /f "tokens=*" %%a in ('%pscmd%') do set wal_pass=%%a
-
-ping 127.0.0.1 -n 2 -w 1000 > NUL
-cls
-echo Please Wait
-echo.
-
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d %wal_user% /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d %wal_pass% /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
-
-ping 127.0.0.1 -n 4 -w 1000 > NUL
-echo DONE!
-pause
-goto start
-
-
-
-:dis_wal
-cls
-echo Disabling Windows AutoLogon
-
-REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /f
-REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /f
-
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 0 /f
-
-ping 127.0.0.1 -n 4 -w 1000 > NUL
-echo DONE!
-pause
+call AutoLogin.cmd
 goto start
 
 
 :ext_driver
-cls
-echo REMOVE "Drivers" FOLDER IF EXISTS
-rmdir /S /Q %UserProfile%\Documents\Drivers
-ping 127.0.0.1 -n 5 -w 1000 > NUL
-
-cls
-echo CREATING NEW FOLDER
-mkdir %UserProfile%\Documents\Drivers
-ping 127.0.0.1 -n 5 -w 1000 > NUL
-
-cls
-DISM.exe /Online /Export-Driver /Destination:%HOMEDRIVE%%HOMEPATH%\Documents\Drivers
-echo PLEASE WAIT...
-ping 127.0.0.1 -n 5 -w 1000 > NUL
-echo.
-echo EXTRACTED in %UserProfile%\Documents\Drivers
-pause
+call Drivers.cmd
 goto start
 
 
 :download_debloaters
-cls
-echo INSTALLING CHOCO IF NOT INSTALLED
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-
-echo PLEASE WAIT
-ping 127.0.0.1 -n 5 -w 1000 > NUL
-echo.
-
-echo INSTALLING WGET
-choco install wget
-ping 127.0.0.1 -n 3 -w 1000 > NUL
-
-cls
-echo Downloading builtbybel/bloatbox
-ping 127.0.0.1 -n 3 -w 1000 > NUL
-mkdir %UserProfile%\Downloads\bloatbox
-wget -O %UserProfile%\Downloads\builtbybel.zip https://github.com/builtbybel/bloatbox/releases/download/0.20.0/bloatbox.zip
-
-echo Downloading Sycnex/Windows10Debloater
-ping 127.0.0.1 -n 3 -w 1000 > NUL
-mkdir %UserProfile%\Downloads\Windows10Debloater
-wget -O %UserProfile%\Downloads\Sycnex.zip https://github.com/Sycnex/Windows10Debloater/archive/refs/heads/master.zip
-
-ping 127.0.0.1 -n 3 -w 1000 > NUL
-goto extract_download_files
-
-
-:extract_download_files
-cls
-echo EXTRACTING....
-tar -xf %UserProfile%\Downloads\builtbybel.zip -C %UserProfile%\Downloads\bloatbox
-tar -xf %UserProfile%\Downloads\Sycnex.zip -C %UserProfile%\Downloads\Windows10Debloater
-ping 127.0.0.1 -n 3 -w 1000 > NUL
-del /f %UserProfile%\Downloads\builtbybel.zip
-del /f %UserProfile%\Downloads\Sycnex.zip
-echo.
-echo Downloaded files to %UserProfile%\Downloads
-echo.
-echo Please run these scripts yourselves at your own risk!!
-pause
+call Debloaters.cmd
 goto start
-
-
 
 
 

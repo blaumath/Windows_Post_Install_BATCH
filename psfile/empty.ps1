@@ -1,29 +1,41 @@
 # Enable TLSv1.2 for compatibility with older clients
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 
-md -Force $env:TEMP\Post
+md -Force $env:TEMP\POST_TEMP
 
-$DownloadURL = 'https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/testing_sperate_files/Install.cmd'
+$MainURL = "https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/testing_sperate_files"
 
-$DownloadActivator = 'https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/testing_sperate_files/IndividualScripts/ActivateWindows.cmd'
+$DownloadURL = "$MainURL/Install.cmd"
 
-$DownloadTweaker = 'https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/testing_sperate_files/IndividualScripts/ChrisTitusTweaker.cmd'
+# Download Individual Scripts
+$DownloadActivator = "$MainURL/IndividualScripts/ActivateWindows.cmd"
+$DownloadTweaker = "$MainURL/IndividualScripts/ChrisTitusTweaker.cmd"
+$DownloadWinget = "$MainURL/IndividualScripts/StandaloneWinget.cmd"
+$DownloadAutoLogin = "$MainURL/IndividualScripts/WindowsAutoLogin.cmd"
+$DownloadDrivers = "$MainURL/IndividualScripts/ExtractDrivers.cmd"
+$DownloadDebloaters = "$MainURL/IndividualScripts/DownloadDebloaters.cmd"
 
 
+$MainPath = "$env:TEMP\POST_TEMP"
 
-
-
-$MainPath = "$env:TEMP\Post"
-
+# Set PATHS
 $InstallPath = "$MainPath\Post_Install.cmd"
 $ActivatorFilePath = "$MainPath\Activator.cmd"
 $TweakerFilePath = "$MainPath\Tweaker.cmd"
+$WingetFilePath = "$MainPath\Winget.cmd"
+$AutoLoginFilePath = "$MainPath\AutoLogin.cmd"
+$DriversFilePath = "$MainPath\Drivers.cmd"
+$DebloaterFilePath = "$MainPath\Debloaters.cmd"
 
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $InstallPath
     Invoke-WebRequest -Uri $DownloadActivator -UseBasicParsing -OutFile $ActivatorFilePath
     Invoke-WebRequest -Uri $DownloadTweaker -UseBasicParsing -OutFile $TweakerFilePath
+    Invoke-WebRequest -Uri $DownloadWinget -UseBasicParsing -OutFile $WingetFilePath
+    Invoke-WebRequest -Uri $DownloadAutoLogin -UseBasicParsing -OutFile $AutoLoginFilePath
+    Invoke-WebRequest -Uri $DownloadDrivers -UseBasicParsing -OutFile $DriversFilePath
+    Invoke-WebRequest -Uri $DownloadDebloaters -UseBasicParsing -OutFile $DebloaterFilePath
 } catch {
     Write-Error $_
 	Return
@@ -31,5 +43,5 @@ try {
 
 if (Test-Path $MainPath){
     Start-Process $InstallPath -Wait
-    rm $env:TEMP\Post -Recurse -Force
+    rm $MainPath -Recurse -Force
 }

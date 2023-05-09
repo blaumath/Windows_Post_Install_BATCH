@@ -1,5 +1,6 @@
 @echo off
-
+rem CenterSelf
+mode 67, 30
 CLS
  ECHO.
  ECHO =============================
