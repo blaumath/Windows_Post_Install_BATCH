@@ -22,11 +22,11 @@ or using the Powershell/Command Prompt command ☟
 <p>
 
 ```
-irm test.8mpty.xyz | iex
+irm post.8mpty.xyz | iex
 ```
 or
 ```
-irm https://test.8mpty.xyz | iex
+irm https://post.8mpty.xyz | iex
 ```
 
 </p>
