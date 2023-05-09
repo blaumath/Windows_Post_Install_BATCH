@@ -95,35 +95,19 @@ goto end
 
 :mass
 cls
-title Activate Windows 10
-%ps%irm https://massgrave.dev/get | iex"
+call ActivateWindows.cmd
 goto start
 
 
 :ctt
 cls
-title ChrisTitusTech Programs Installer
-%ps%irm https://christitus.com/win | iex"
+call ChrisTitusTweaker.cmd
 goto start
 
 
 :wg
 cls
-echo PLEASE STAND BY....
-
-%ps%Set-ExecutionPolicy Unrestricted -Scope CurrentUser"
-ping 127.0.0.1 -n 2 -w 1000 > NUL
-
-%ps%Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted"
-ping 127.0.0.1 -n 2 -w 1000 > NUL
-
-::echo Press Enter
-
-%ps%Install-Script -Name winget-install -Force"
-ping 127.0.0.1 -n 2 -w 1000 > NUL
-
-%ps%winget-install.ps1"
-ping 127.0.0.1 -n 2 -w 1000 > NUL
+call StandaloneWinget.cmd
 pause
 goto start
 
