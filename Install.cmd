@@ -61,8 +61,12 @@ CLS
 title (TESTING_BRANCH) AFTER_WINDOWS_INSTALL
 mode 67, 30
 
-IF EXIST %temp%\POST_TEMP\ ( cd /D %temp%/POST_TEMP/ ) else ( cd ./IndividualScripts/ )
-cls
+IF NOT EXIST %temp%\POST_TEMP\ (
+	cd ./IndividualScripts/
+)else (
+	cd /D %temp%/POST_TEMP/
+)
+
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 
 echo ----------------------------------------------------------------
