@@ -61,11 +61,8 @@ CLS
 title (TESTING_BRANCH) AFTER_WINDOWS_INSTALL
 mode 67, 30
 
-IF NOT EXIST %temp%\POST_TEMP\ (
-	cd ./IndividualScripts/
-)else (
-	cd /D %temp%/POST_TEMP/
-)
+IF NOT EXIST %temp%\POST_TEMP\ (cd ./IndividualScripts/) else ( cd /D %temp%/POST_TEMP/)
+cls
 
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 
@@ -120,11 +117,13 @@ goto start
 
 
 :ext_driver
+cls
 call ExtractDrivers.cmd
 goto start
 
 
 :download_debloaters
+cls
 call DownloadDebloaters.cmd
 goto start
 

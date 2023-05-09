@@ -1,9 +1,12 @@
 # Enable TLSv1.2 for compatibility with older clients
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 
-md -Force $env:TEMP\POST_TEMP
-
 $MainURL = "https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/testing_sperate_files"
+$MainPath = "$env:TEMP\POST_TEMP"
+
+if(!(Test-Path $MainPath)){
+    md -Force $MainPath
+}
 
 $DownloadURL = "$MainURL/Install.cmd"
 
@@ -15,9 +18,6 @@ $DownloadAutoLogin = "$MainURL/IndividualScripts/WindowsAutoLogin.cmd"
 $DownloadDrivers = "$MainURL/IndividualScripts/ExtractDrivers.cmd"
 $DownloadDebloaters = "$MainURL/IndividualScripts/DownloadDebloaters.cmd"
 
-
-$MainPath = "$env:TEMP\POST_TEMP"
-
 # Set PATHS
 $InstallPath = "$MainPath\Post_Install.cmd"
 $ActivatorFilePath = "$MainPath\ActivateWindows.cmd"
@@ -26,7 +26,6 @@ $WingetFilePath = "$MainPath\StandaloneWinget.cmd"
 $AutoLoginFilePath = "$MainPath\WindowsAutoLogin.cmd"
 $DriversFilePath = "$MainPath\ExtractDrivers.cmd"
 $DebloaterFilePath = "$MainPath\DownloadDebloaters.cmd"
-
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $InstallPath

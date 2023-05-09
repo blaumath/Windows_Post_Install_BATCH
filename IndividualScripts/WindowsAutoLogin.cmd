@@ -121,12 +121,13 @@ goto wal_start
 :dis_wal
 cls
 echo Disabling Windows AutoLogon
+echo.
 
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /f
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /f
 
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 0 /f
-
+echo.
 ping 127.0.0.1 -n 4 -w 1000 > NUL
 echo DONE!
 pause
