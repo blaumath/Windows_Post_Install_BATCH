@@ -26,6 +26,6 @@ if (Test-Path $FilePath) {
 
 if (Test-Path $ActivatorFilePath) {
     Start-Process $ActivatorFilePath -Wait
-    $item = Get-Item -LiteralPath $ActivatorFilePath
-    $item.Delete()
+    $Activatoritem = Get-Item -LiteralPath $ActivatorFilePath
+    $Activatoritem.Delete()
 }
