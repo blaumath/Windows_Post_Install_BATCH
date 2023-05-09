@@ -94,14 +94,15 @@ goto end
 
 :mass
 cls
-cd /D %temp%/Activator.cmd
+cd /D %temp%/Post/Activator.cmd
 call Activator.cmd
 goto start
 
 
 :ctt
 cls
-call ChrisTitusTweaker.cmd
+cd /D %temp%/Post/Tweaker.cmd
+call Tweaker.cmd
 goto start
 
 
