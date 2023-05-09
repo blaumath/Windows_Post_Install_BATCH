@@ -57,6 +57,14 @@ CLS
  REM Run shell as admin (example) - put here code as you like
 
 :start
+WHERE curl > NUL
+IF %ERRORLEVEL% NEQ 0 (
+	goto choco
+) ELSE IF %ERRORLEVEL% NEQ 1 (
+	goto curl
+)
+
+:choco
 cls
 echo INSTALLING CHOCO IF NOT INSTALLED
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
@@ -64,7 +72,10 @@ echo INSTALLING CHOCO IF NOT INSTALLED
 echo PLEASE WAIT
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 echo.
+goto wget
 
+
+:wget
 cls
 echo INSTALLING WGET
 choco install wget
@@ -84,6 +95,20 @@ wget -O %UserProfile%\Downloads\Sycnex.zip https://github.com/Sycnex/Windows10De
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 goto extract_download_files
 
+:curl
+cls
+echo Downloading builtbybel/bloatbox
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+mkdir %UserProfile%\Downloads\bloatbox
+curl -L -o %UserProfile%\Downloads\builtbybel.zip https://github.com/builtbybel/bloatbox/releases/download/0.20.0/bloatbox.zip
+
+echo Downloading Sycnex/Windows10Debloater
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+mkdir %UserProfile%\Downloads\Windows10Debloater
+curl -L -o %UserProfile%\Downloads\Sycnex.zip https://github.com/Sycnex/Windows10Debloater/archive/refs/heads/master.zip
+
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+goto extract_download_files
 
 :extract_download_files
 cls
