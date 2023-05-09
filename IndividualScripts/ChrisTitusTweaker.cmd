@@ -1,7 +1,6 @@
 @echo off
 rem CenterSelf
 mode 67, 30
-
 CLS
  ECHO.
  ECHO =============================
@@ -58,78 +57,7 @@ CLS
  REM Run shell as admin (example) - put here code as you like
 
 :start
-title (TESTING_BRANCH) AFTER_WINDOWS_INSTALL
-mode 67, 30
-
-IF NOT EXIST %temp%\POST_TEMP\ (cd ./IndividualScripts/) else ( cd /D %temp%/POST_TEMP/)
 cls
-
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
-
-echo ----------------------------------------------------------------
-echo                         Choose Options                          
-echo ----------------------------------------------------------------
-echo.
-echo 1. Activate Windows 10
-echo 2. ChrisTitusTech's Programs Install Manager
-echo 3. Standalone Winget Install
-echo 4. Enable/Disable Windows AutoLogin
-echo 5. Extract all Drivers
-echo 6. Download Debloater Scripts/Programs
-echo 0. Exit
-echo.
-
-
-echo Enter choice on your keyboard [1,2,3,4,5,6,0]: 
-choice /C:1234560 /N
-set _erl=%errorlevel%
-
-
-if %_erl%==0 goto end
-if %_erl%==6 goto download_debloaters
-if %_erl%==5 goto ext_driver
-if %_erl%==4 goto wal
-if %_erl%==3 goto wg
-if %_erl%==2 goto ctt
-if %_erl%==1 goto mass
-
-goto end
-
-:mass
-cls
-call ActivateWindows.cmd
-goto start
-
-:ctt
-cls
-call ChrisTitusTweaker.cmd
-goto start
-
-:wg
-cls
-call StandaloneWinget.cmd
-goto start
-
-:wal
-cls
-call WindowsAutoLogin.cmd
-goto start
-
-
-:ext_driver
-cls
-call ExtractDrivers.cmd
-goto start
-
-
-:download_debloaters
-cls
-call DownloadDebloaters.cmd
-goto start
-
-
-
-
-
-:end
-exit /b
+title ChrisTitusTech Programs Installer (FROM INDIVIDUAL FOLDER)
+%ps%irm https://christitus.com/win | iex"

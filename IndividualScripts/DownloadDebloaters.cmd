@@ -1,7 +1,6 @@
 @echo off
 rem CenterSelf
 mode 67, 30
-
 CLS
  ECHO.
  ECHO =============================
@@ -58,78 +57,43 @@ CLS
  REM Run shell as admin (example) - put here code as you like
 
 :start
-title (TESTING_BRANCH) AFTER_WINDOWS_INSTALL
-mode 67, 30
-
-IF NOT EXIST %temp%\POST_TEMP\ (cd ./IndividualScripts/) else ( cd /D %temp%/POST_TEMP/)
 cls
+echo INSTALLING CHOCO IF NOT INSTALLED
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
-set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
-
-echo ----------------------------------------------------------------
-echo                         Choose Options                          
-echo ----------------------------------------------------------------
-echo.
-echo 1. Activate Windows 10
-echo 2. ChrisTitusTech's Programs Install Manager
-echo 3. Standalone Winget Install
-echo 4. Enable/Disable Windows AutoLogin
-echo 5. Extract all Drivers
-echo 6. Download Debloater Scripts/Programs
-echo 0. Exit
+echo PLEASE WAIT
+ping 127.0.0.1 -n 5 -w 1000 > NUL
 echo.
 
+echo INSTALLING WGET
+choco install wget
+ping 127.0.0.1 -n 3 -w 1000 > NUL
 
-echo Enter choice on your keyboard [1,2,3,4,5,6,0]: 
-choice /C:1234560 /N
-set _erl=%errorlevel%
-
-
-if %_erl%==0 goto end
-if %_erl%==6 goto download_debloaters
-if %_erl%==5 goto ext_driver
-if %_erl%==4 goto wal
-if %_erl%==3 goto wg
-if %_erl%==2 goto ctt
-if %_erl%==1 goto mass
-
-goto end
-
-:mass
 cls
-call ActivateWindows.cmd
-goto start
+echo Downloading builtbybel/bloatbox
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+mkdir %UserProfile%\Downloads\bloatbox
+wget -O %UserProfile%\Downloads\builtbybel.zip https://github.com/builtbybel/bloatbox/releases/download/0.20.0/bloatbox.zip
 
-:ctt
+echo Downloading Sycnex/Windows10Debloater
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+mkdir %UserProfile%\Downloads\Windows10Debloater
+wget -O %UserProfile%\Downloads\Sycnex.zip https://github.com/Sycnex/Windows10Debloater/archive/refs/heads/master.zip
+
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+goto extract_download_files
+
+
+:extract_download_files
 cls
-call ChrisTitusTweaker.cmd
-goto start
-
-:wg
-cls
-call StandaloneWinget.cmd
-goto start
-
-:wal
-cls
-call WindowsAutoLogin.cmd
-goto start
-
-
-:ext_driver
-cls
-call ExtractDrivers.cmd
-goto start
-
-
-:download_debloaters
-cls
-call DownloadDebloaters.cmd
-goto start
-
-
-
-
-
-:end
-exit /b
+echo EXTRACTING....
+tar -xf %UserProfile%\Downloads\builtbybel.zip -C %UserProfile%\Downloads\bloatbox
+tar -xf %UserProfile%\Downloads\Sycnex.zip -C %UserProfile%\Downloads\Windows10Debloater
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+del /f %UserProfile%\Downloads\builtbybel.zip
+del /f %UserProfile%\Downloads\Sycnex.zip
+echo.
+echo Downloaded files to %UserProfile%\Downloads
+echo.
+echo Please run these scripts yourselves at your own risk!!
+pause
