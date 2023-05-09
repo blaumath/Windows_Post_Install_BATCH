@@ -1,7 +1,7 @@
 # Enable TLSv1.2 for compatibility with older clients
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 
-$MainURL = "https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/testing_sperate_files"
+$MainURL = "https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/main"
 $MainPath = "$env:TEMP\POST_TEMP"
 
 if(!(Test-Path $MainPath)){
