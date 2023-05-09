@@ -1,6 +1,5 @@
 @echo off
-rem CenterSelf
-mode 67, 30
+
 CLS
  ECHO.
  ECHO =============================
@@ -58,6 +57,19 @@ CLS
 
 :start
 cls
-set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
-title ChrisTitusTech Programs Installer (FROM INDIVIDUAL FOLDER)
-%ps%irm https://christitus.com/win | iex"
+echo REMOVE "Drivers" FOLDER IF EXISTS
+rmdir /S /Q %UserProfile%\Documents\Drivers
+ping 127.0.0.1 -n 5 -w 1000 > NUL
+
+cls
+echo CREATING NEW FOLDER
+mkdir %UserProfile%\Documents\Drivers
+ping 127.0.0.1 -n 5 -w 1000 > NUL
+
+cls
+DISM.exe /Online /Export-Driver /Destination:%HOMEDRIVE%%HOMEPATH%\Documents\Drivers
+echo PLEASE WAIT...
+ping 127.0.0.1 -n 5 -w 1000 > NUL
+echo.
+echo EXTRACTED in %UserProfile%\Documents\Drivers
+pause
