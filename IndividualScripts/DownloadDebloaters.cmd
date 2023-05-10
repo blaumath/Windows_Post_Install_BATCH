@@ -57,46 +57,87 @@ CLS
  REM Run shell as admin (example) - put here code as you like
 
 :start
-WHERE curl > NUL
-IF %ERRORLEVEL% NEQ 0 (
-	goto choco
-) ELSE IF %ERRORLEVEL% NEQ 1 (
-	goto curl
-)
+cls
+echo ----------------------------------------------------------------
+echo                         Download Options                          
+echo ----------------------------------------------------------------
+echo.
+echo 1. Using CURL (default/builtin/slow sometimes)
+echo 2. Using WGET (newer/takes up more space/needs to download)
+echo 0. Exit
+echo.
 
+
+echo Enter choice on your keyboard [1,2,0]: 
+choice /C:120 /N
+set _erl=%errorlevel%
+
+if %_erl%==0 goto end
+if %_erl%==2 goto choco
+if %_erl%==1 goto curl
+
+goto end
 :choco
 cls
+TITLE USING WGET
 echo INSTALLING CHOCO IF NOT INSTALLED
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-
-echo PLEASE WAIT
-ping 127.0.0.1 -n 3 -w 1000 > NUL
+ping 127.0.0.1 -n 1 -w 1000 > NUL
 echo.
+
+WHERE choco > nul
+IF %ERRORLEVEL% NEQ 0 (
+	echo Choco is NOT installed. Downloading.....
+	ping 127.0.0.1 -n 2 -w 1000 > NUL
+	@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+	echo DONE
+	ping 127.0.0.1 -n 2 -w 1000 > NUL
+	
+) ELSE IF %ERRORLEVEL% NEQ 1 (
+	echo Choco is installed. Skipping Downloading.....
+	ping 127.0.0.1 -n 2 -w 1000 > NUL
+)
 goto wget
+
 
 
 :wget
 cls
-echo INSTALLING WGET
-choco install wget
-ping 127.0.0.1 -n 3 -w 1000 > NUL
+WHERE wget > nul
+IF %ERRORLEVEL% NEQ 0 (
+	echo Wget is NOT installed. Downloading.....
+	choco install wget
+	ping 127.0.0.1 -n 2 -w 1000 > NUL
+	
+	echo DONE
+	ping 127.0.0.1 -n 2 -w 1000 > NUL
 
+) ELSE IF %ERRORLEVEL% NEQ 1 (
+	echo Wget is installed. Skipping Downloading.....
+	ping 127.0.0.1 -n 2 -w 1000 > NUL
+)
+goto wget_in
+
+:wget_in
 cls
+TITLE USING WGET
 echo Downloading builtbybel/bloatbox
-ping 127.0.0.1 -n 3 -w 1000 > NUL
+ping 127.0.0.1 -n 2 -w 1000 > NUL
 mkdir %UserProfile%\Downloads\bloatbox
-wget -O %UserProfile%\Downloads\builtbybel.zip https://github.com/builtbybel/bloatbox/releases/download/0.20.0/bloatbox.zip
+wget -O %UserProfile%\Downloads\builtbybel.zip https://github.com/builtbybel/bloatbox/releases/download/0.20.0/bloatbox.zip & TITLE USING WGET
 
 echo Downloading Sycnex/Windows10Debloater
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 mkdir %UserProfile%\Downloads\Windows10Debloater
 wget -O %UserProfile%\Downloads\Sycnex.zip https://github.com/Sycnex/Windows10Debloater/archive/refs/heads/master.zip
+TITLE USING WGET
 
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 goto extract_download_files
 
-:curl
+:curl_in
 cls
+TITLE USING CURL
 echo Downloading builtbybel/bloatbox
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 mkdir %UserProfile%\Downloads\bloatbox
@@ -131,3 +172,6 @@ echo Downloaded files to %UserProfile%\Downloads
 echo.
 echo Please run these scripts yourselves at your own risk!!
 pause
+
+:end
+exit /b

@@ -58,6 +58,30 @@ CLS
 
 :start
 cls
+echo ----------------------------------------------------------------
+echo                         Download Options                          
+echo ----------------------------------------------------------------
+echo.
+echo 1. Download / Install Standalone Winget
+echo 2. Download / Install Choco
+echo 0. Exit
+echo.
+
+
+echo Enter choice on your keyboard [1,2,0]: 
+choice /C:120 /N
+set _erl=%errorlevel%
+
+
+if %_erl%==0 goto end
+if %_erl%==2 goto choco
+if %_erl%==1 goto winget
+
+goto end
+
+:winget
+cls
+TITLE DOWNLOADING & INSTALLING WINGET
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 title Standalone Winget Install (FROM INDIVIDUAL FOLDER)
 echo PLEASE STAND BY....
@@ -75,4 +99,17 @@ ping 127.0.0.1 -n 2 -w 1000 > NUL
 
 %ps%winget-install.ps1"
 ping 127.0.0.1 -n 2 -w 1000 > NUL
-pause
+goto start
+
+:choco
+cls
+TITLE DOWNLOADING / INSTALLING CHOCO
+echo INSTALLING CHOCO IF NOT INSTALLED
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+echo DONE
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+goto start
+
+:end
+exit /b
