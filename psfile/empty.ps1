@@ -8,24 +8,24 @@ if(!(Test-Path $MainPath)){
     md -Force $MainPath | Out-Null
 }
 
-$DownloadURL = "$MainURL/Install.cmd"
+$DownloadURL = "$MainURL/Install.bat"
 
 # Download Individual Scripts
-$DownloadActivator = "$MainURL/IndividualScripts/ActivateWindows.cmd"
-$DownloadTweaker = "$MainURL/IndividualScripts/ChrisTitusTweaker.cmd"
-$DownloadWinget = "$MainURL/IndividualScripts/StandaloneWinget.cmd"
-$DownloadAutoLogin = "$MainURL/IndividualScripts/WindowsAutoLogin.cmd"
-$DownloadDrivers = "$MainURL/IndividualScripts/ExtractDrivers.cmd"
-$DownloadDebloaters = "$MainURL/IndividualScripts/DownloadDebloaters.cmd"
+$DownloadActivator = "$MainURL/IndividualScripts/ActivateWindows.bat"
+$DownloadTweaker = "$MainURL/IndividualScripts/ChrisTitusTweaker.bat"
+$DownloadWinget = "$MainURL/IndividualScripts/StandaloneWinget.bat"
+$DownloadAutoLogin = "$MainURL/IndividualScripts/WindowsAutoLogin.bat"
+$DownloadDrivers = "$MainURL/IndividualScripts/ExtractDrivers.bat"
+$DownloadDebloaters = "$MainURL/IndividualScripts/DownloadDebloaters.bat"
 
 # Set PATHS
-$InstallPath = "$MainPath\Post_Install.cmd"
-$ActivatorFilePath = "$MainPath\ActivateWindows.cmd"
-$TweakerFilePath = "$MainPath\ChrisTitusTweaker.cmd"
-$WingetFilePath = "$MainPath\StandaloneWinget.cmd"
-$AutoLoginFilePath = "$MainPath\WindowsAutoLogin.cmd"
-$DriversFilePath = "$MainPath\ExtractDrivers.cmd"
-$DebloaterFilePath = "$MainPath\DownloadDebloaters.cmd"
+$InstallPath = "$MainPath\Post_Install.bat"
+$ActivatorFilePath = "$MainPath\ActivateWindows.bat"
+$TweakerFilePath = "$MainPath\ChrisTitusTweaker.bat"
+$WingetFilePath = "$MainPath\StandaloneWinget.bat"
+$AutoLoginFilePath = "$MainPath\WindowsAutoLogin.bat"
+$DriversFilePath = "$MainPath\ExtractDrivers.bat"
+$DebloaterFilePath = "$MainPath\DownloadDebloaters.bat"
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $InstallPath

@@ -97,34 +97,34 @@ goto end
 
 :mass
 cls
-call ActivateWindows.cmd
+call ActivateWindows.bat
 goto start
 
 :ctt
 cls
-call ChrisTitusTweaker.cmd
+call ChrisTitusTweaker.bat
 goto start
 
 :wg
 cls
-call StandaloneWinget.cmd
+call StandaloneWinget.bat
 goto start
 
 :wal
 cls
-call WindowsAutoLogin.cmd
+call WindowsAutoLogin.bat
 goto start
 
 
 :ext_driver
 cls
-call ExtractDrivers.cmd
+call ExtractDrivers.bat
 goto start
 
 
 :download_debloaters
 cls
-call DownloadDebloaters.cmd
+call DownloadDebloaters.bat
 goto start
 
 
