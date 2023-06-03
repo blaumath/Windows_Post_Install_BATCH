@@ -4,7 +4,7 @@
 ## Disclaimer!
 As of right now, an **INTERNET Connection** is required for this script to run properly. 
 
-Will have a fully offline version down the road.
+W̶i̶l̶l̶ ̶h̶a̶v̶e̶ ̶a̶ ̶f̶u̶l̶l̶y̶ ̶o̶f̶f̶l̶i̶n̶e̶ ̶v̶e̶r̶s̶i̶o̶n̶ ̶d̶o̶w̶n̶ ̶t̶h̶e̶ ̶r̶o̶a̶d̶.̶ (Hell no)
 
 TASKLIST:
 
@@ -32,7 +32,7 @@ irm https://post.8mpty.xyz | iex
 </p>
 </details>
 
-**EXE and MSI formats will be provided at a later date.**
+**E̶X̶E̶ ̶a̶n̶d̶ ̶M̶S̶I̶ ̶f̶o̶r̶m̶a̶t̶s̶ ̶w̶i̶l̶l̶ ̶b̶e̶ ̶p̶r̶o̶v̶i̶d̶e̶d̶ ̶a̶t̶ ̶a̶ ̶l̶a̶t̶e̶r̶ ̶d̶a̶t̶e̶.̶** (Nevermind)
  
  
  
