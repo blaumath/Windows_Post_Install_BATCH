@@ -14,7 +14,7 @@ TASKLIST:
  
 ## Installation
  
-Either download the zip file and launch the "Install.cmd" file 
+Either download the zip file and launch the "Install.bat" file 
  
 or using the Powershell/Command Prompt command ☟
 
