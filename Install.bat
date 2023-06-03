@@ -76,16 +76,18 @@ echo 3. Standalone Winget Install
 echo 4. Enable/Disable Windows AutoLogin
 echo 5. Extract all Drivers
 echo 6. Download Debloater Scripts/Programs
+echo 7. Remove/Restore Folders from "This PC"
 echo 0. Exit
 echo.
 
 
-echo Enter choice on your keyboard [1,2,3,4,5,6,0]: 
-choice /C:1234560 /N
+echo Enter choice on your keyboard [1,2,3,4,5,6,7,0]: 
+choice /C:12345670 /N
 set _erl=%errorlevel%
 
 
 if %_erl%==0 goto end
+if %_erl%==7 goto remove_restore_folders
 if %_erl%==6 goto download_debloaters
 if %_erl%==5 goto ext_driver
 if %_erl%==4 goto wal
@@ -127,7 +129,10 @@ cls
 call DownloadDebloaters.bat
 goto start
 
-
+:remove_restore_folders
+cls
+call RemoveOrRestoreFolders.bat
+goto start
 
 
 
