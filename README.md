@@ -4,7 +4,7 @@
 ## Disclaimer!
 As of right now, an **INTERNET Connection** is required for this script to run properly. 
 
-Will have a fully offline version down the road.
+W̶i̶l̶l̶ ̶h̶a̶v̶e̶ ̶a̶ ̶f̶u̶l̶l̶y̶ ̶o̶f̶f̶l̶i̶n̶e̶ ̶v̶e̶r̶s̶i̶o̶n̶ ̶d̶o̶w̶n̶ ̶t̶h̶e̶ ̶r̶o̶a̶d̶.̶ (Hell no)
 
 TASKLIST:
 
