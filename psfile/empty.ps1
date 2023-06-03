@@ -17,6 +17,7 @@ $DownloadWinget = "$MainURL/IndividualScripts/StandaloneWinget.bat"
 $DownloadAutoLogin = "$MainURL/IndividualScripts/WindowsAutoLogin.bat"
 $DownloadDrivers = "$MainURL/IndividualScripts/ExtractDrivers.bat"
 $DownloadDebloaters = "$MainURL/IndividualScripts/DownloadDebloaters.bat"
+$DownloadFolderStuff = "$MainURL/IndividualScripts/RemoveOrRestoreFolders.bat"
 
 # Set PATHS
 $InstallPath = "$MainPath\Post_Install.bat"
@@ -26,6 +27,7 @@ $WingetFilePath = "$MainPath\StandaloneWinget.bat"
 $AutoLoginFilePath = "$MainPath\WindowsAutoLogin.bat"
 $DriversFilePath = "$MainPath\ExtractDrivers.bat"
 $DebloaterFilePath = "$MainPath\DownloadDebloaters.bat"
+$FolderStufFilePath = "$MainPath\RemoveOrRestoreFolders.bat"
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $InstallPath
@@ -35,6 +37,7 @@ try {
     Invoke-WebRequest -Uri $DownloadAutoLogin -UseBasicParsing -OutFile $AutoLoginFilePath
     Invoke-WebRequest -Uri $DownloadDrivers -UseBasicParsing -OutFile $DriversFilePath
     Invoke-WebRequest -Uri $DownloadDebloaters -UseBasicParsing -OutFile $DebloaterFilePath
+    Invoke-WebRequest -Uri $DownloadFolderStuff -UseBasicParsing -OutFile $FolderStufFilePath
 } catch {
     Write-Error $_
 	Return

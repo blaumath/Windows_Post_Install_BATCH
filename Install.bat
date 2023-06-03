@@ -129,6 +129,7 @@ cls
 call DownloadDebloaters.bat
 goto start
 
+
 :remove_restore_folders
 cls
 call RemoveOrRestoreFolders.bat
