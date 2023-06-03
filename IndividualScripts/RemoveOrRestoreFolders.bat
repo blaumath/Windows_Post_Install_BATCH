@@ -615,7 +615,7 @@ set delay=2
 set def=HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace
 echo Restoring Pictures Folder
 REG ADD "%def%\{3ADD1653-EB32-4cb0-BBD7-DFA0ABB5ACCA}" /f
-REG ADD "%def%"\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f
+REG ADD "%def%\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f
 echo Restoring Successfull!
 ping 127.0.0.1 -n %delay% -w 1000 > NUL
 goto start
