@@ -7,6 +7,6 @@
 !.README.md
 
 # But do not ignore specific folders and files
-!/InvividualScripts/
+#!/InvividualScripts/
 !/psfile/
 !/Install.bat
