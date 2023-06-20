@@ -1,12 +1,12 @@
 # Ignore Everything
 /*
 
-# Do not ignore gitignore file
+# But do not ignore gitignore file
 !.gitignore
 !.gitattributes
 !.README.md
 
-# Do not ignore specific folders and files
+# But do not ignore specific folders and files
 !/InvividualScripts/
 !/psfile/
 !/Install.bat
