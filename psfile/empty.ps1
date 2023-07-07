@@ -19,6 +19,7 @@ $DownloadDrivers = "$MainURL/IndividualScripts/ExtractDrivers.bat"
 $DownloadDebloaters = "$MainURL/IndividualScripts/DownloadDebloaters.bat"
 $DownloadFolderStuff = "$MainURL/IndividualScripts/RemoveOrRestoreFolders.bat"
 $DownloadUAC = "$MainURL/IndividualScripts/UAC.bat"
+$DownloadFF = "$MainURL/IndividualScripts/FF_Profile.bat"
 
 # Set PATHS
 $InstallPath = "$MainPath\Post_Install.bat"
@@ -30,6 +31,7 @@ $DriversFilePath = "$MainPath\ExtractDrivers.bat"
 $DebloaterFilePath = "$MainPath\DownloadDebloaters.bat"
 $FolderStufFilePath = "$MainPath\RemoveOrRestoreFolders.bat"
 $UACFilePath = "$MainPath\UAC.bat"
+$FFFilePath = "$MainPath\FF_Profile.bat"
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $InstallPath
@@ -41,6 +43,7 @@ try {
     Invoke-WebRequest -Uri $DownloadDebloaters -UseBasicParsing -OutFile $DebloaterFilePath
     Invoke-WebRequest -Uri $DownloadFolderStuff -UseBasicParsing -OutFile $FolderStufFilePath
     Invoke-WebRequest -Uri $DownloadUAC -UseBasicParsing -OutFile $UACFilePath
+    Invoke-WebRequest -Uri $DownloadFF -UseBasicParsing -OutFile $FFFilePath
 } catch {
     Write-Error $_
 	Return

@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 rem CenterSelf
 mode 67, 30
 
@@ -57,97 +58,83 @@ CLS
  ::::::::::::::::::::::::::::
  REM Run shell as admin (example) - put here code as you like
 
-:start
-title AFTER_WINDOWS_INSTALL
-mode 67, 30
 
-IF NOT EXIST %temp%\POST_TEMP\ (cd ./IndividualScripts/) else ( cd /D %temp%/POST_TEMP/)
+:start
 cls
 
-set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
-
 echo ----------------------------------------------------------------
-echo                         Choose Options                          
-echo ----------------------------------------------------------------
+echo                      Backup Firefox Settings                    
+echo ---------------------------------------------------------------- 
 echo.
-echo 1. Activate Windows 10
-echo 2. ChrisTitusTech's Programs Install Manager
-echo 3. Standalone Winget Install
-echo 4. Enable/Disable Windows AutoLogin
-echo 5. Extract all Drivers
-echo 6. Download Debloater Scripts/Programs
-echo 7. Remove/Restore Folders from "This PC"
-echo 8. Enable/Disable UAC Verification
+echo 1. Backup settings from Firefox Folder
 echo 0. Exit
 echo.
 
+echo Enter choice in your keyboard [1,0]: 
+choice /C:10 /N
+set _erl_wal=%errorlevel% 
 
-echo Enter choice on your keyboard [1,2,3,4,5,6,7,8,0]: 
-choice /C:123456780 /N
-set _erl=%errorlevel%
-
-
-if %_erl%==0 goto end
-if %_erl%==8 goto uac_verification
-if %_erl%==7 goto remove_restore_folders
-if %_erl%==6 goto download_debloaters
-if %_erl%==5 goto ext_driver
-if %_erl%==4 goto wal
-if %_erl%==3 goto wg
-if %_erl%==2 goto ctt
-if %_erl%==1 goto mass
+if %_erl_wal%==0 goto end
+if %_erl_wal%==1 goto backup
 
 goto end
 
-:mass
+
+:backup
 cls
-call ActivateWindows.bat
-goto start
+SET FF=%USERPROFILE%\AppData\Roaming\Mozilla\Firefox\Profiles
+set /a count=0
+cd /D %FF%
+echo ----------------------------------------------------------------
+echo                     Available Firefox Folders                     
+echo ---------------------------------------------------------------- 
+echo.
 
-:ctt
+for /d %%d in (*) do (
+  set "folder=%%d"
+  if "!folder:*.default=!" neq "!folder!" (
+    echo Skipping "%%d" folder "Not Used"
+  ) else (
+    set /a count+=1
+    set "folder[!count!]=%%d"
+    echo [!count!] %%d
+  )
+)
+
+echo.
+set /p choice=Enter the Firefox folder number you want to backup from: 
+
+if defined folder[%choice%] (
+  cd "!folder[%choice%]!"
+) else (
+  cls
+  echo Invalid choice.
+  goto backup
+)
+
 cls
-call ChrisTitusTweaker.bat
-goto start
-
-:wg
+echo SAVING FILES...
+mkdir saved_data
 cls
-call StandaloneWinget.bat
+echo SAVING FILES...
+xcopy /y "%CD%\places.sqlite" "%CD%\saved_data"
+xcopy /y "%CD%\favicons.sqlite" "%CD%\saved_data"
+xcopy /y "%CD%\key4.db" "%CD%\saved_data"
+xcopy /y "%CD%\logins.json" "%CD%\saved_data"
+xcopy /y "%CD%\permissions.sqlite" "%CD%\saved_data"
+xcopy /y "%CD%\search.json.mozlz4" "%CD%\saved_data"
+xcopy /y "%CD%\persdict.dat" "%CD%\saved_data"
+xcopy /y "%CD%\formhistory.sqlite" "%CD%\saved_data"
+xcopy /y "%CD%\cookies.sqlite" "%CD%\saved_data"
+xcopy /y "%CD%\cert9.db" "%CD%\saved_data"
+xcopy /y "%CD%\handlers.json" "%CD%\saved_data"
+xcopy /y "%CD%\user.js" "%CD%\saved_data"
+ping 127.0.0.1 -n 2 -w 1000 > NUL
+echo DONE!!
+echo FILES SAVED TO %CD%\saved_data !!
+%SystemRoot%\explorer.exe "%CD%\saved_data"
+ping 127.0.0.1 -n 3 -w 1000 > NUL
 goto start
-
-:wal
-cls
-call WindowsAutoLogin.bat
-goto start
-
-
-:ext_driver
-cls
-call ExtractDrivers.bat
-goto start
-
-
-:download_debloaters
-cls
-call DownloadDebloaters.bat
-goto start
-
-
-:remove_restore_folders
-cls
-call RemoveOrRestoreFolders.bat
-goto start
-
-
-:uac_verification
-cls
-call UAC.bat
-goto start
-
-:ff
-cls
-call FF_Profile.bat
-goto start
-
 
 :end
 exit /b
