@@ -91,7 +91,7 @@ goto start
 :dis_uac
 cls
 echo Disabling
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d 4
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d 5
 ping 127.0.0.1 -n 2 -w 1000 > NUL
 echo DONE!!
 goto start
