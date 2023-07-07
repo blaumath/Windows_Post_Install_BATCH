@@ -8,25 +8,23 @@ if(!(Test-Path $MainPath)){
     md -Force $MainPath | Out-Null
 }
 
-$InstallFileName = "Install.bat"
-
 $scripts = @{
-    "Install.bat" = $MainPath
-    "ActivateWindows.bat" = "ActivateWindows.bat"
-    "ChrisTitusTweaker.bat" = "ChrisTitusTweaker.bat"
-    "StandaloneWinget.bat" = "StandaloneWinget.bat"
-    "WindowsAutoLogin.bat" = "WindowsAutoLogin.bat"
-    "ExtractDrivers.bat" = "ExtractDrivers.bat"
-    "DownloadDebloaters.bat" = "DownloadDebloaters.bat"
-    "RemoveOrRestoreFolders.bat" = "RemoveOrRestoreFolders.bat"
-    "UAC.bat" = "UAC.bat"
-    "FF_Profile.bat" = "FF_Profile.bat"
+    "Install.bat" = "Install.bat"
+    "IndividualScripts/ActivateWindows.bat" = "ActivateWindows.bat"
+    "IndividualScripts/ChrisTitusTweaker.bat" = "ChrisTitusTweaker.bat"
+    "IndividualScripts/StandaloneWinget.bat" = "StandaloneWinget.bat"
+    "IndividualScripts/WindowsAutoLogin.bat" = "WindowsAutoLogin.bat"
+    "IndividualScripts/ExtractDrivers.bat" = "ExtractDrivers.bat"
+    "IndividualScripts/DownloadDebloaters.bat" = "DownloadDebloaters.bat"
+    "IndividualScripts/RemoveOrRestoreFolders.bat" = "RemoveOrRestoreFolders.bat"
+    "IndividualScripts/UAC.bat" = "UAC.bat"
+    "IndividualScripts/FF_Profile.bat" = "FF_Profile.bat"
 }
 
 try {
-    foreach ($script in $scripts.Keys) {
-        $downloadURL = "$MainURL/IndividualScripts/$script"
-        $filePath = "$MainPath\" + $scripts[$script]
+    foreach ($script in $scripts.GetEnumerator()) {
+        $downloadURL = "$MainURL/$($script.Key)"
+        $filePath = "$MainPath\$($script.Value)"
         Invoke-WebRequest -Uri $downloadURL -UseBasicParsing -OutFile $filePath
     }
 } catch {
@@ -35,6 +33,6 @@ try {
 }
 
 if (Test-Path $MainPath) {
-    Start-Process $InstallFileName -Wait -WorkingDirectory $MainPath
-    Remove-Item $MainPath -Recurse -Force
+    Start-Process -FilePath "$MainPath\Install.bat" -Wait
+    Remove-Item -Path $MainPath -Recurse -Force
 }
