@@ -78,16 +78,18 @@ echo 5. Extract all Drivers
 echo 6. Download Debloater Scripts/Programs
 echo 7. Remove/Restore Folders from "This PC"
 echo 8. Enable/Disable UAC Verification
+echo 9. Backup Firefox Settings
 echo 0. Exit
 echo.
 
 
-echo Enter choice on your keyboard [1,2,3,4,5,6,7,8,0]: 
-choice /C:123456780 /N
+echo Enter choice on your keyboard [1,2,3,4,5,6,7,8,90]: 
+choice /C:1234567890 /N
 set _erl=%errorlevel%
 
 
 if %_erl%==0 goto end
+if %_erl%==9 goto ff
 if %_erl%==8 goto uac_verification
 if %_erl%==7 goto remove_restore_folders
 if %_erl%==6 goto download_debloaters
