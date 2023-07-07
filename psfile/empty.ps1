@@ -8,48 +8,33 @@ if(!(Test-Path $MainPath)){
     md -Force $MainPath | Out-Null
 }
 
-$DownloadURL = "$MainURL/Install.bat"
+$InstallFileName = "Install.bat"
 
-# Download Individual Scripts
-$DownloadActivator = "$MainURL/IndividualScripts/ActivateWindows.bat"
-$DownloadTweaker = "$MainURL/IndividualScripts/ChrisTitusTweaker.bat"
-$DownloadWinget = "$MainURL/IndividualScripts/StandaloneWinget.bat"
-$DownloadAutoLogin = "$MainURL/IndividualScripts/WindowsAutoLogin.bat"
-$DownloadDrivers = "$MainURL/IndividualScripts/ExtractDrivers.bat"
-$DownloadDebloaters = "$MainURL/IndividualScripts/DownloadDebloaters.bat"
-$DownloadFolderStuff = "$MainURL/IndividualScripts/RemoveOrRestoreFolders.bat"
-$DownloadUAC = "$MainURL/IndividualScripts/UAC.bat"
-$DownloadFF = "$MainURL/IndividualScripts/FF_Profile.bat"
-
-# Set PATHS
-$InstallPath = "$MainPath\Post_Install.bat"
-$ActivatorFilePath = "$MainPath\ActivateWindows.bat"
-$TweakerFilePath = "$MainPath\ChrisTitusTweaker.bat"
-$WingetFilePath = "$MainPath\StandaloneWinget.bat"
-$AutoLoginFilePath = "$MainPath\WindowsAutoLogin.bat"
-$DriversFilePath = "$MainPath\ExtractDrivers.bat"
-$DebloaterFilePath = "$MainPath\DownloadDebloaters.bat"
-$FolderStufFilePath = "$MainPath\RemoveOrRestoreFolders.bat"
-$UACFilePath = "$MainPath\UAC.bat"
-$FFFilePath = "$MainPath\FF_Profile.bat"
-
-try {
-    Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $InstallPath
-    Invoke-WebRequest -Uri $DownloadActivator -UseBasicParsing -OutFile $ActivatorFilePath
-    Invoke-WebRequest -Uri $DownloadTweaker -UseBasicParsing -OutFile $TweakerFilePath
-    Invoke-WebRequest -Uri $DownloadWinget -UseBasicParsing -OutFile $WingetFilePath
-    Invoke-WebRequest -Uri $DownloadAutoLogin -UseBasicParsing -OutFile $AutoLoginFilePath
-    Invoke-WebRequest -Uri $DownloadDrivers -UseBasicParsing -OutFile $DriversFilePath
-    Invoke-WebRequest -Uri $DownloadDebloaters -UseBasicParsing -OutFile $DebloaterFilePath
-    Invoke-WebRequest -Uri $DownloadFolderStuff -UseBasicParsing -OutFile $FolderStufFilePath
-    Invoke-WebRequest -Uri $DownloadUAC -UseBasicParsing -OutFile $UACFilePath
-    Invoke-WebRequest -Uri $DownloadFF -UseBasicParsing -OutFile $FFFilePath
-} catch {
-    Write-Error $_
-	Return
+$scripts = @{
+    "Install.bat" = $MainPath
+    "ActivateWindows.bat" = "ActivateWindows.bat"
+    "ChrisTitusTweaker.bat" = "ChrisTitusTweaker.bat"
+    "StandaloneWinget.bat" = "StandaloneWinget.bat"
+    "WindowsAutoLogin.bat" = "WindowsAutoLogin.bat"
+    "ExtractDrivers.bat" = "ExtractDrivers.bat"
+    "DownloadDebloaters.bat" = "DownloadDebloaters.bat"
+    "RemoveOrRestoreFolders.bat" = "RemoveOrRestoreFolders.bat"
+    "UAC.bat" = "UAC.bat"
+    "FF_Profile.bat" = "FF_Profile.bat"
 }
 
-if (Test-Path $MainPath){
-    Start-Process $InstallPath -Wait
-    rm $MainPath -Recurse -Force
+try {
+    foreach ($script in $scripts.Keys) {
+        $downloadURL = "$MainURL/IndividualScripts/$script"
+        $filePath = "$MainPath\" + $scripts[$script]
+        Invoke-WebRequest -Uri $downloadURL -UseBasicParsing -OutFile $filePath
+    }
+} catch {
+    Write-Error $_
+    return
+}
+
+if (Test-Path $MainPath) {
+    Start-Process $InstallFileName -Wait -WorkingDirectory $MainPath
+    Remove-Item $MainPath -Recurse -Force
 }
