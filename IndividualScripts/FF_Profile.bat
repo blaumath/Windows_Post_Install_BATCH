@@ -94,16 +94,16 @@ for /d %%d in (*) do (
   if "!folder:*.dev-edition-default=!" neq "!folder!" (
     set /a count+=1
     set "folder[!count!]=%%d"
-    echo [!count!] %%d
+    echo [!count!] %%d ^(Firefox Developer Edition^)
   ) else if "!folder:*.default-release=!" neq "!folder!" (
     set /a count+=1
     set "folder[!count!]=%%d"
-    echo [!count!] %%d
+    echo [!count!] %%d ^(Firefox Edition^)
   ) else if "!folder:*.default=!" neq "!folder!" (
-    echo Skipping "%%d" folder "Not Used"
+    echo.
   )
 )
-
+echo.
 echo [0] Exit
 echo.
 set /p choice=Enter the Firefox folder number you want to backup from: 
