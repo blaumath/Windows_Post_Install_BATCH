@@ -100,13 +100,13 @@ echo ----------------------------------------------------------------
 echo                      Choose Options [Extras]                    
 echo ----------------------------------------------------------------
 echo.
-echo [1]. Standalone Winget Install
-echo [2]. Extract all Drivers
-echo [3]. Remove/Restore Folders from "This PC"
-echo [4]. Enable/Disable UAC Verification
-echo [5]. Backup Firefox Settings
-echo [9]. Go Back
-echo [0]. Exit
+echo  [1]. Standalone Winget Install
+echo  [2]. Extract all Drivers
+echo  [3]. Remove/Restore Folders from "This PC"
+echo  [4]. Enable/Disable UAC Verification
+echo  [5]. Backup Firefox Settings
+echo  [9]. Go Back
+echo  [0]. Exit
 echo.
 
 echo Enter choice on your keyboard [1,2,3,4,5,9,0]: 
