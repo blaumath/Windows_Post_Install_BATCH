@@ -83,7 +83,7 @@ goto end
 :en_uac
 cls
 echo Enabling
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d 3
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v "ConsentPromptBehaviorAdmin" /t REG_DWORD /d 1
 ping 127.0.0.1 -n 2 -w 1000 > NUL
 echo DONE!!
 goto start
