@@ -65,10 +65,27 @@ echo                         Windows AutoLogon
 echo ----------------------------------------------------------------
 
 :: Check if windows auto login is enabled or disabled
-powershell.exe -NoProfile -ExecutionPolicy Unrestricted -encodedCommand DQAKACQAdwBhAGwAXwBzAHQAYQB0AHUAcwAgAD0AIABHAGUAdAAtAEkAdABlAG0AUAByAG8AcABlAHIAdAB5ACAALQBQAGEAdABoACAAJwBIAEsATABNADoAXABTAE8ARgBUAFcAQQBSAEUAXABNAGkAYwByAG8AcwBvAGYAdABcAFcAaQBuAGQAbwB3AHMAIABOAFQAXABDAHUAcgByAGUAbgB0AFYAZQByAHMAaQBvAG4AXABXAGkAbgBsAG8AZwBvAG4AJwAgAC0ATgBhAG0AZQAgAEQAZQBmAGEAdQBsAHQAUABhAHMAcwB3AG8AcgBkACAALQBFAHIAcgBvAHIAQQBjAHQAaQBvAG4AIABJAGcAbgBvAHIAZQANAAoADQAKAGkAZgAgACgAJAB3AGEAbABfAHMAdABhAHQAdQBzACkAewANAAoAIAAgACAAIAB3AHIAaQB0AGUALQBoAG8AcwB0ACAAUwB0AGEAdAB1AHMAOgAgAC0ARgBvAHIAZQBnAHIAbwB1AG4AZABDAG8AbABvAHIAIABXAGgAaQB0AGUAIABFAG4AYQBiAGwAZQBkACAALQBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEQAYQByAGsARwByAGUAZQBuAA0ACgB9ACAAZQBsAHMAZQAgAHsADQAKACAAIAAgACAAdwByAGkAdABlAC0AaABvAHMAdAAgAFMAdABhAHQAdQBzADoAIAAtAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByACAAVwBoAGkAdABlACAARABpAHMAYQBiAGwAZQBkACAALQBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgAgAEQAYQByAGsAUgBlAGQADQAKAH0A
+
+set "RegKey=HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+set "RegVal=AutoAdminLogon"
+
+for /f "tokens=3" %%i in ('reg query "%RegKey%" /v "%RegVal%" 2^>nul') do (
+    set "ValueData=%%i"
+)
+
+if defined ValueData (
+    if "%ValueData%"=="1" (
+        echo Status: Enabled
+    ) else (
+        echo Status: Disabled
+    )
+) else (
+    echo Status: Disabled
+)
 
 ping 127.0.0.1 -n 2 -w 1000 > NUL
-
+echo.
+echo USING IS SCRIPT IS DANGEROUS, PLEASE USE CHRIS'S TITUS TECH OPTION INSTEAD, YOU HAVE BEEN WARNED
 echo.
 echo 1. Enable Windows AutoLogon
 echo 2. Disable Windows AutoLogon
