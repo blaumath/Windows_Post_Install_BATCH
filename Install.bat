@@ -57,7 +57,7 @@ CLS
  ::::::::::::::::::::::::::::
  REM Run shell as admin (example) - put here code as you like
 
-IF NOT EXIST %temp%\POST_TEMP\ (cd ./IndividualScripts/) else ( cd /D %temp%/POST_TEMP/)
+IF NOT EXIST %temp%\POST_TEMP\ (cd /D ./IndividualScripts/) else ( cd /D %temp%/POST_TEMP/)
 set ps=powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "
 title AFTER_WINDOWS_INSTALL
 mode 67, 30

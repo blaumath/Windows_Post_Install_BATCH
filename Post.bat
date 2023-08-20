@@ -1,4 +1,5 @@
 @echo off
+mode 67, 30
 
 echo ===============================
 echo  Checking Internet Connection
