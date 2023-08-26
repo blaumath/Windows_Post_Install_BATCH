@@ -58,15 +58,23 @@ CLS
  REM Run shell as admin (example) - put here code as you like
 
 :start
-IF NOT EXIST %temp%\POST_TEMP\ (cd /D ./IndividualScripts/) else ( cd /D %temp%/POST_TEMP/)
 cls
-echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-echo sLinkFile = "%UserProfile%\Desktop\Post_Install.lnk" >> CreateShortcut.vbs
-echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
-echo oLink.TargetPath = "%SystemRoot%\System32\cmd.exe" >> CreateShortcut.vbs
-echo oLink.Arguments = "/c ""Post.bat""" >> CreateShortcut.vbs
-echo oLink.WorkingDirectory = "%~dp0" >> CreateShortcut.vbs
-echo oLink.IconLocation = "%SystemRoot%\System32\imageres.dll,197" >> CreateShortcut.vbs
-echo oLink.Save >> CreateShortcut.vbs
-cscript CreateShortcut.vbs
-del CreateShortcut.vbs
+echo Creating Shortcut....
+ping 127.0.0.1 -n 3 -w 1000 > NUL
+set "ShortcutName=PostScript"
+set "ShortcutTarget=powershell.exe"
+set "ShortcutArguments=-ExecutionPolicy Bypass -Command ""Start-Process powershell.exe -Verb RunAs -ArgumentList 'irm https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/main/psfile/empty.ps1 | iex '"""
+set "ShortcutLocation=%userprofile%\Desktop"
+
+echo Set oWS = WScript.CreateObject("WScript.Shell") > %temp%\CreateShortcut.vbs
+echo sLinkFile = "%ShortcutLocation%\%ShortcutName%.lnk" >> %temp%\CreateShortcut.vbs
+echo Set oLink = oWS.CreateShortcut(sLinkFile) >> %temp%\CreateShortcut.vbs
+echo oLink.TargetPath = "%ShortcutTarget%" >> %temp%\CreateShortcut.vbs
+echo oLink.Arguments = "%ShortcutArguments%" >> %temp%\CreateShortcut.vbs
+echo oLink.IconLocation = "%SystemRoot%\System32\imageres.dll,56" >> %temp%\CreateShortcut.vbs
+echo oLink.Save >> %temp%\CreateShortcut.vbs
+
+cscript /nologo %temp%\CreateShortcut.vbs
+del %temp%\CreateShortcut.vbs
+echo Done!!
+ping 127.0.0.1 -n 3 -w 1000 > NUL
