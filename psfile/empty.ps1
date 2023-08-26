@@ -10,6 +10,7 @@ if(!(Test-Path $MainPath)){
 
 $scripts = @{
     "Install.bat" = "Install.bat"
+    "IndividualScripts/Post.bat" = "Post.bat"
     "IndividualScripts/ActivateWindows.bat" = "ActivateWindows.bat"
     "IndividualScripts/ChrisTitusTweaker.bat" = "ChrisTitusTweaker.bat"
     "IndividualScripts/StandaloneWinget.bat" = "StandaloneWinget.bat"
@@ -19,6 +20,7 @@ $scripts = @{
     "IndividualScripts/RemoveOrRestoreFolders.bat" = "RemoveOrRestoreFolders.bat"
     "IndividualScripts/UAC.bat" = "UAC.bat"
     "IndividualScripts/FF_Profile.bat" = "FF_Profile.bat"
+    "IndividualScripts/ShortcutMaker.bat" = "ShortcutMaker.bat"
 }
 
 try {

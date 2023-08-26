@@ -69,7 +69,7 @@ echo ----------------------------------------------------------------
 echo                         Choose Options                          
 echo ----------------------------------------------------------------
 echo.
-echo  [1]. Activate Windows 10
+echo  [1]. Windows Activator
 echo  [2]. ChrisTitusTech's Programs Install Manager
 echo  [3]. Enable/Disable Windows AutoLogin
 echo  [4]. Download Debloater Scripts/Programs
@@ -105,17 +105,19 @@ echo  [2]. Extract all Drivers
 echo  [3]. Remove/Restore Folders from "This PC"
 echo  [4]. Enable/Disable UAC Verification
 echo  [5]. Backup Firefox Settings
+echo  [6]. Create Shortcut for this script (Desktop)
 echo  [9]. Go Back
 echo  [0]. Exit
 echo.
 
-echo Enter choice on your keyboard [1,2,3,4,5,9,0]: 
-choice /C:1234590 /N
+echo Enter choice on your keyboard [1,2,3,4,5,6,9,0]: 
+choice /C:12345690 /N
 set _erl=%errorlevel%
 
 
 if %_erl%==0 goto end
-if %_erl%==6 goto start
+if %_erl%==7 goto start
+if %_erl%==6 goto shortcutmaker
 if %_erl%==5 goto ff
 if %_erl%==4 goto uac_verification
 if %_erl%==3 goto remove_restore_folders
@@ -171,6 +173,11 @@ goto start
 :ff
 cls
 call FF_Profile.bat
+goto start
+
+:shortcutmaker
+cls
+call ShortcutMaker.bat
 goto start
 
 

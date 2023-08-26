@@ -1,5 +1,5 @@
 @echo off
-mode 67, 30
+mode con: cols=67 lines=30
 
 echo ===============================
 echo  Checking Internet Connection
