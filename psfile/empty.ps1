@@ -25,10 +25,10 @@ $scripts = @{
     "IndividualScripts/DownloadScript.bat" = "DownloadScript.bat"
 }
 
-
+$sub = "\Install.bat"
 try {
     try {
-        Invoke-WebRequest -Uri $MainURLBAT -UseBasicParsing -OutFile $MainPath + "\Install.bat"
+        Invoke-WebRequest -Uri $MainURLBAT -UseBasicParsing -OutFile $MainPath + $sub
     } catch {
         foreach ($script in $scripts.GetEnumerator()) {
             $downloadURL = "$MainURL/$($script.Key)"
