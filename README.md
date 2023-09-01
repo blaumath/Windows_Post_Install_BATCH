@@ -10,7 +10,8 @@ TASKLIST:
 
 - [x] Script Creation
 - [x] IRM Version for using in terminal 
-- [ ] Offline Install Version
+- ~~[ ] Offline Install Version~~ (Not Possible)
+- [ ] EXE Version? (Maybe)
  
 ## HOW TOs
 
