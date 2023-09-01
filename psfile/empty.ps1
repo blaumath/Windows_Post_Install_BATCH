@@ -1,6 +1,7 @@
 # Enable TLSv1.2 for compatibility with older clients
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 
+$MainURLBAT = "https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/main/Install.bat"
 $MainURL = "https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/main"
 $MainPath = "$env:TEMP\POST_TEMP"
 
@@ -25,15 +26,21 @@ $scripts = @{
 }
 
 try {
-    foreach ($script in $scripts.GetEnumerator()) {
-        $downloadURL = "$MainURL/$($script.Key)"
-        $filePath = "$MainPath\$($script.Value)"
-        Invoke-WebRequest -Uri $downloadURL -UseBasicParsing -OutFile $filePath
+    try {
+        Invoke-WebRequest -Uri $MainURLBAT -UseBasicParsing -OutFile $MainPath
+    } catch {
+        foreach ($script in $scripts.GetEnumerator()) {
+            $downloadURL = "$MainURL/$($script.Key)"
+            $filePath = "$MainPath\$($script.Value)"
+            Invoke-WebRequest -Uri $downloadURL -UseBasicParsing -OutFile $filePath
+        }
     }
 } catch {
     Write-Error $_
     return
 }
+
+
 
 if (Test-Path $MainPath) {
     if ($args.Count -ge 1) {
