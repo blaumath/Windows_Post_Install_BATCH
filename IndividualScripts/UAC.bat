@@ -67,7 +67,7 @@ echo ----------------------------------------------------------------
 echo.
 echo 1. Enable Admin Verifications in UAC
 echo 2. Disable + Enhanced (More Secure)
-echo 2. Disable (Less Secure) (Windows Default)*
+echo 3. Disable (Less Secure) (Windows Default)*
 echo 0. Exit
 echo.
 
