@@ -29,11 +29,7 @@ try {
     try {
         Invoke-WebRequest -Uri $MainURLBAT -UseBasicParsing -OutFile $MainPath
     } catch {
-        foreach ($script in $scripts.GetEnumerator()) {
-            $downloadURL = "$MainURL/$($script.Key)"
-            $filePath = "$MainPath\$($script.Value)"
-            Invoke-WebRequest -Uri $downloadURL -UseBasicParsing -OutFile $filePath
-        }
+
     }
 } catch {
     Write-Error $_
