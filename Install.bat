@@ -77,20 +77,23 @@ echo  [5]. Extras
 echo  [0]. Exit
 echo.
 
+set op=%~1
 
-echo Enter choice on your keyboard [1,2,3,4,5,0]: 
-choice /C:123450 /N
-set _erl=%errorlevel%
+if "%op%"=="" (
+    set /P op=Enter your choice on your keyboard [1,2,3,4,5,0]: 
+) else (
+    shift
+)
 
 
-if %_erl%==0 goto end
-if %_erl%==5 goto misc
-if %_erl%==4 goto download_debloaters
-if %_erl%==3 goto wal
-if %_erl%==2 goto ctt
-if %_erl%==1 goto mass
+if %op%==0 goto end
+if %op%==5 goto misc
+if %op%==4 goto download_debloaters
+if %op%==3 goto wal
+if %op%==2 goto ctt
+if %op%==1 goto mass
 
-goto end
+goto start
 
 :misc
 cls
@@ -110,21 +113,24 @@ echo  [9]. Go Back
 echo  [0]. Exit
 echo.
 
-echo Enter choice on your keyboard [1,2,3,4,5,6,9,0]: 
-choice /C:12345690 /N
-set _erl=%errorlevel%
+set op=%~1
 
+if "%op%"=="" ( 
+    set /P op=Enter choice on your keyboard [1,2,3,4,5,6,9,0]: 
+) else (
+    shift
+)
 
-if %_erl%==0 goto end
-if %_erl%==7 goto start
-if %_erl%==6 goto shortcutmaker
-if %_erl%==5 goto ff
-if %_erl%==4 goto uac_verification
-if %_erl%==3 goto remove_restore_folders
-if %_erl%==2 goto ext_driver
-if %_erl%==1 goto wg
+if %op%==0 goto end
+if %op%==9 goto start
+if %op%==6 goto shortcutmaker
+if %op%==5 goto ff
+if %op%==4 goto uac_verification
+if %op%==3 goto remove_restore_folders
+if %op%==2 goto ext_driver
+if %op%==1 goto wg
 
-goto end
+goto misc
 
 :mass
 cls
