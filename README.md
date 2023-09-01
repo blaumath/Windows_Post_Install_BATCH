@@ -40,7 +40,7 @@ irm https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/main/psfi
 
 ## Additional Options
 
-You may also pass in **UNLIMITED** arguments into the script downloaded locally or over the internet with "irm". (See [Additional Disclaimers](https://github.com/8mpty/Windows_Post_Install_BATCH/edit/main/README.md#additional-options-disclaimers)))
+You may also pass in **UNLIMITED** arguments into the script downloaded locally or over the internet with "irm". (See [Additional Disclaimers](https://github.com/8mpty/Windows_Post_Install_BATCH/tree/main#additional-options-disclaimers)))
 
 **ARGUMENTS MUST BE SEPERATE WITH A SPACING TO WORK** EX. ```5 6``` and not ```56```
 
