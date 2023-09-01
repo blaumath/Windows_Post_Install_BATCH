@@ -25,12 +25,22 @@ $scripts = @{
     "IndividualScripts/DownloadScript.bat" = "DownloadScript.bat"
 }
 
-try {
-    try {
-        Invoke-WebRequest -Uri $MainURLBAT -UseBasicParsing -OutFile $MainPath
-    } catch {
 
+try {
+    foreach ($script in $scripts.GetEnumerator()) {
+        $downloadURL = "$MainURL/$($script.Key)"
+        $filePath = "$MainPath\$($script.Value)"
+    try {
+        Invoke-WebRequest -Uri $MainURL/$($script.Key[0]) -UseBasicParsing -OutFile $MainPath\$($script.Value[0])
+    } catch {
+        foreach ($script in $scripts.GetEnumerator()) {
+            $downloadURL = "$MainURL/$($script.Key)"
+            $filePath = "$MainPath\$($script.Value)"
+            Invoke-WebRequest -Uri $downloadURL -UseBasicParsing -OutFile $filePath
+        }
     }
+    }
+    
 } catch {
     Write-Error $_
     return
