@@ -35,6 +35,11 @@ try {
 }
 
 if (Test-Path $MainPath) {
-    Start-Process -FilePath "$MainPath\Install.bat" -Wait
+    if ($args.Count -gt 0){
+        $op = $args[0]
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList $op -Wait
+    }else {
+        Start-Process -FilePath "$MainPath\Install.bat" -Wait    
+    }
     Remove-Item -Path $MainPath -Recurse -Force
 }
