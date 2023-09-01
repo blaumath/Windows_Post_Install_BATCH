@@ -4,7 +4,7 @@ Post Install Script With Collections Of Online And Personal Scripts.
 ## Disclaimer!
 An **INTERNET Connection** is required for this script to run properly.
 
-W̶i̶l̶l̶ ̶h̶a̶v̶e̶ ̶a̶ ̶f̶u̶l̶l̶y̶ ̶o̶f̶f̶l̶i̶n̶e̶ ̶v̶e̶r̶s̶i̶o̶n̶ ̶d̶o̶w̶n̶ ̶t̶h̶e̶ ̶r̶o̶a̶d̶.̶ (Hell no)
+~~Will have a full offline version down the road.~~ (Not Possible)
 
 TASKLIST:
 
@@ -35,11 +35,12 @@ irm https://raw.githubusercontent.com/8mpty/Windows_Post_Install_BATCH/main/psfi
 </p>
 </details>
 
-**E̶X̶E̶ ̶a̶n̶d̶ ̶M̶S̶I̶ ̶f̶o̶r̶m̶a̶t̶s̶ ̶w̶i̶l̶l̶ ̶b̶e̶ ̶p̶r̶o̶v̶i̶d̶e̶d̶ ̶a̶t̶ ̶a̶ ̶l̶a̶t̶e̶r̶ ̶d̶a̶t̶e̶.̶** (Nevermind)
+~~EXE and MSI formats will be provided at a later data.~~ (Maybe)
 
 
 ## Additional Options
-You may also pass in a max of **[2]** arguments into the script downloaded locally or over the internet with "irm"
+
+You may also pass in **UNLIMITED** arguments into the script downloaded locally or over the internet with "irm". (See [Additional Disclaimers](https://github.com/8mpty/Windows_Post_Install_BATCH/edit/main/README.md#additional-options-disclaimers)))
 
 **ARGUMENTS MUST BE SEPERATE WITH A SPACING TO WORK** EX. ```5 6``` and not ```56```
 
@@ -85,11 +86,42 @@ Will go the [Extras] page and execute option [6] which is creating the script sh
 
 ## Additional Options (Disclaimers)
 
-Ofcourse these options are not only limited to Options 5 & 6, other options are availble to try but do **NOTE** that only a max of "2" options are availble.
+~~Ofcourse these options are not only limited to Options 5 & 6, other options are availble to try but do **NOTE** that only a max of "2" options are availble.~~
 
-As of right now, this script is not able to run further than "2" arguments like ```iex "&{$(irm post.8mpty.xyz)} 5 3 1"```.
+~~As of right now, this script is not able to run further than "2" arguments like ```iex "&{$(irm post.8mpty.xyz)} 5 3 1"```.~~
 
-Above is meant to go to the [Extras] Page and execute option [3] which is "Removal of Folders" and will execute [1] to confirm the removal but as of this current iteration of the script, it is **NOT POSSIBLE** yet.
+~~Above is meant to go to the [Extras] Page and execute option [3] which is "Removal of Folders" and will execute [1] to confirm the removal but as of this current iteration of the script, it is **NOT POSSIBLE** yet.~~
+
+The script is now able to run unlimited arguments as long as the arguments corresponds to the correct options in the script.
+
+Fixed in Commits [986aa9a](https://github.com/8mpty/Windows_Post_Install_BATCH/commit/986aa9ab654410e7510039f2ac0ead36be0ef178#diff-4c4389ae3adbd3780d385439f1e161d08aade4df4cc5fd544c6ae4c0e45c7320) , [61aaf40](https://github.com/8mpty/Windows_Post_Install_BATCH/commit/61aaf4015acd8c20b287b41212bc69b5b1c57596) and [e0fb8c3](https://github.com/8mpty/Windows_Post_Install_BATCH/commit/e0fb8c31d21ad3345a0906292ee633af6f2b370a).
+
+EX. ```iex "&{$(irm post.8mpty.xyz)} 5 4 2 5 3 1 1 7 0"```
+
+<details><summary>Explanation from left to right argumetns: (Click Me)</summary>
+<p>
+
+```
+5: Go to [Extras] page
+
+4: Execute [UAC_Verification] Option
+
+2: Select option [2] which is [Disable + Enchanced] option
+
+5: Go back to [Extras] page
+
+3: Execute [Remove or Restore folders] option 
+
+1: Select [Remove Folders] Option
+
+1: Select [64 Bit] Architecture
+
+7: Remove [ALL] folders
+
+0: Exits the script
+```
+</p>
+</details>
 
 ## References (Scripts)
  
