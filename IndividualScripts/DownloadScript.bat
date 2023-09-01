@@ -155,8 +155,6 @@ ping 127.0.0.1 -n 3 -w 1000 > NUL
 del /f %UserProfile%\Desktop\8mpty_script.zip
 echo.
 echo Downloaded files to %UserProfile%\Desktop
-echo.
-echo Please run these scripts yourselves at your own risk!!
 pause
 
 :end
