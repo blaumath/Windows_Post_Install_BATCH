@@ -109,6 +109,7 @@ echo  [3]. Remove/Restore Folders from "This PC"
 echo  [4]. Enable/Disable UAC Verification
 echo  [5]. Backup Firefox Settings
 echo  [6]. Create Shortcut for this script (Desktop)
+echo  [7]. Download This Script Locally
 echo  [9]. Go Back
 echo  [0]. Exit
 echo.
@@ -116,13 +117,14 @@ echo.
 set op=%~1
 
 if "%op%"=="" ( 
-    set /P op=Enter choice on your keyboard [1,2,3,4,5,6,9,0]: 
+    set /P op=Enter choice on your keyboard [1,2,3,4,5,6,7,9,0]: 
 ) else (
     shift
 )
 
 if %op%==0 goto end
 if %op%==9 goto start
+if %op%==7 goto dw_script
 if %op%==6 goto shortcutmaker
 if %op%==5 goto ff
 if %op%==4 goto uac_verification
@@ -186,6 +188,10 @@ cls
 call ShortcutMaker.bat
 goto start
 
+:dw_script
+cls
+call DownloadScript.bat
+goto start
 
 :end
 exit /b

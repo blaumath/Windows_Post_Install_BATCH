@@ -21,6 +21,7 @@ $scripts = @{
     "IndividualScripts/UAC.bat" = "UAC.bat"
     "IndividualScripts/FF_Profile.bat" = "FF_Profile.bat"
     "IndividualScripts/ShortcutMaker.bat" = "ShortcutMaker.bat"
+    "IndividualScripts/DownloadScript.bat" = "DownloadScript.bat"
 }
 
 try {

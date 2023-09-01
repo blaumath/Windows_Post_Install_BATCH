@@ -121,16 +121,10 @@ goto wget_in
 :wget_in
 cls
 TITLE USING WGET
-echo Downloading builtbybel/bloatbox
+echo Downloading 8mpty/Windows_Post_Install_Batch
 ping 127.0.0.1 -n 2 -w 1000 > NUL
-mkdir %UserProfile%\Downloads\bloatbox
-wget -O %UserProfile%\Downloads\builtbybel.zip https://github.com/builtbybel/bloatbox/releases/download/0.20.0/bloatbox.zip & TITLE USING WGET
-
-echo Downloading Sycnex/Windows10Debloater
-ping 127.0.0.1 -n 3 -w 1000 > NUL
-mkdir %UserProfile%\Downloads\Windows10Debloater
-wget -O %UserProfile%\Downloads\Sycnex.zip https://github.com/Sycnex/Windows10Debloater/archive/refs/heads/master.zip
-TITLE USING WGET
+mkdir %UserProfile%\Desktop\Windows_Post_Install_Batch
+wget -O %UserProfile%\Desktop\8mpty_script.zip https://github.com/8mpty/Windows_Post_Install_BATCH/archive/refs/heads/main.zip & TITLE USING WGET
 
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 goto extract_download_files
@@ -138,15 +132,10 @@ goto extract_download_files
 :curl_in
 cls
 TITLE USING CURL
-echo Downloading builtbybel/bloatbox
+echo Downloading 8mpty/Windows_Post_Install_Batch
 ping 127.0.0.1 -n 3 -w 1000 > NUL
-mkdir %UserProfile%\Downloads\bloatbox
-curl -L -o %UserProfile%\Downloads\builtbybel.zip https://github.com/builtbybel/bloatbox/releases/download/0.20.0/bloatbox.zip
-
-echo Downloading Sycnex/Windows10Debloater
-ping 127.0.0.1 -n 3 -w 1000 > NUL
-mkdir %UserProfile%\Downloads\Windows10Debloater
-curl -L -o %UserProfile%\Downloads\Sycnex.zip https://github.com/Sycnex/Windows10Debloater/archive/refs/heads/master.zip
+mkdir %UserProfile%\Desktop\Windows_Post_Install_Batch
+curl -L -o %UserProfile%\Desktop\8mpty_script.zip https://github.com/8mpty/Windows_Post_Install_BATCH/archive/refs/heads/main.zip & TITLE USING CURL
 
 ping 127.0.0.1 -n 3 -w 1000 > NUL
 goto extract_download_files
@@ -157,18 +146,15 @@ echo EXTRACTING....
 
 WHERE tar > NUL
 IF %ERRORLEVEL% NEQ 0 (
-	powershell -command "Expand-Archive -Force '%UserProfile%\Downloads\builtbybel.zip' '%UserProfile%\Downloads\bloatbox'
-	powershell -command "Expand-Archive -Force '%UserProfile%\Downloads\Sycnex.zip' '%UserProfile%\Downloads\Windows10Debloater'
+	powershell -command "Expand-Archive -Force '%UserProfile%\Desktop\8mpty_script.zip' '%UserProfile%\Desktop\Windows_Post_Install_Batch'
 ) ELSE IF %ERRORLEVEL% NEQ 1 (
-	tar -xf %UserProfile%\Downloads\builtbybel.zip -C %UserProfile%\Downloads\bloatbox
-	tar -xf %UserProfile%\Downloads\Sycnex.zip -C %UserProfile%\Downloads\Windows10Debloater
+	tar -xf %UserProfile%\Desktop\8mpty_script.zip -C %UserProfile%\Desktop\Windows_Post_Install_Batch
 )
 
 ping 127.0.0.1 -n 3 -w 1000 > NUL
-del /f %UserProfile%\Downloads\builtbybel.zip
-del /f %UserProfile%\Downloads\Sycnex.zip
+del /f %UserProfile%\Desktop\8mpty_script.zip
 echo.
-echo Downloaded files to %UserProfile%\Downloads
+echo Downloaded files to %UserProfile%\Desktop
 echo.
 echo Please run these scripts yourselves at your own risk!!
 pause
