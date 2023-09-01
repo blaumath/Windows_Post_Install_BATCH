@@ -37,7 +37,8 @@ try {
 if (Test-Path $MainPath) {
     if ($args.Count -gt 0){
         $op = $args[0]
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList $op -Wait
+        $op2 = $args[1..($args.Count - 1)]
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList $op, $op2 -Wait
     }else {
         Start-Process -FilePath "$MainPath\Install.bat" -Wait    
     }
