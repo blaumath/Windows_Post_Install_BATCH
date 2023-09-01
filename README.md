@@ -15,7 +15,7 @@ TASKLIST:
  
 ## HOW TOs
 
-Option 1: Either download the zip file and launch the "Install.bat" file 
+Option 1: Either [download](https://github.com/8mpty/Windows_Post_Install_BATCH/archive/refs/heads/main.zip) the zip file and launch the "Install.bat" file 
  
 Option 2: Using the Powershell/Terminal commands below ☟
 
