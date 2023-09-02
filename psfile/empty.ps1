@@ -59,10 +59,10 @@ if (Test-Path $MainPath) {
         Write-Host "MORE THAN 1 WITH /S"
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow -Wait
 
-    }elseif ($args.Count -ge 2 -and $args[0] -eq "/s" -and $args[1] -ne "/s"){
+    }elseif ($args.Count -ge 2 -and ($args[0] -eq "/s" -and $args[1] -ne "/s")){
         $op = $args[1]
         Write-Host "MORE THAN 1 WITH /S ONLY 1 OPTION"
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op" -NoNewWindow -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op 0" -NoNewWindow -Wait
 
     } else {
         Write-Host "NORMAL"
