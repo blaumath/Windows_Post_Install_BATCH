@@ -52,10 +52,10 @@ if (Test-Path $MainPath) {
     if ($args.Count -ge 1) {
         $op = $args[0]
         $op2 = $args[1..($args.Length - 1)] -join ' '
-        Write-Host "NO" $op $op2
+        Write-Host "NOO" $op $op2
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
     } else {
-        Write-Host "NORMAL"
+        Write-Host "NORMALL"
         Start-Process -FilePath "$MainPath\Install.bat" -Wait    
     }
 
