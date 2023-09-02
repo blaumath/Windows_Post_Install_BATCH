@@ -45,7 +45,7 @@ if (Test-Path $MainPath) {
         $op = $args[0]
         $op2 = $args[1..($args.Length - 1)] -join ' '
         Write-Host "WITHH /s" $op $op2
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow
     } elseif ($args.Count -ge 1 -and $args[0] -ne "/s") {
         $op = $args[0]
         $op2 = $args[1..($args.Length - 1)] -join ' '
