@@ -55,7 +55,7 @@ if (Test-Path $MainPath) {
         Start-Sleep -Seconds 3
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
 
-    }elseif ($args.Count -ge 2 -and $args[0] -eq "/s"){
+    }elseif ($args.Count -ge 2 -and ($args[0] -eq "/s" -and $args[2] -ne $null)){
         $op = $args[1]
         $op2 = $args[2..($args.Length - 1)] -join ' '
         Write-Host "MORE THAN 1 WITH /S"
