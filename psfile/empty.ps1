@@ -61,13 +61,13 @@ if (Test-Path $MainPath) {
         $op0 = "0"
         Write-Host "MORE THAN 1 WITH /S"
         Start-Sleep -Seconds 3
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput $null -RedirectStandardError $null -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL" -UseShellExecute $false -Wait
 
     }elseif (($args.Count -ge 2 -and $args.Count -lt 3) -and ($args[0] -eq "/s" -and $args[1] -ne "/s")){
         $op = $args[1]
         Write-Host "MORE THAN 1 WITH /S ONLY 1 OPTION"
         Start-Sleep -Seconds 3
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op 0" -NoNewWindow -RedirectStandardOutput $null -RedirectStandardError $null -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op 0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL" -UseShellExecute $false -Wait
 
     } else {
         Write-Host "NORMAL"
