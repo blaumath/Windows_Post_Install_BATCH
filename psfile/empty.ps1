@@ -60,7 +60,7 @@ if (Test-Path $MainPath) {
         $op2 = $args[2..($args.Length - 1)] -join ' '
         Write-Host "MORE THAN 1 WITH /S"
         Start-Sleep -Seconds 3
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2 0" -NoNewWindow -Wait
 
     }elseif (($args.Count -ge 2 -and $args.Count -lt 3) -and ($args[0] -eq "/s" -and $args[1] -ne "/s")){
         $op = $args[1]
