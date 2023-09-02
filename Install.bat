@@ -293,7 +293,13 @@ REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogo
 
 ping 127.0.0.1 -n 4 -w 1000 > NUL
 echo DONE!
-pause
+set op=%~1
+
+if "%op%"=="" (
+    pause
+) else (
+    echo Y | pause
+)
 goto wal_start
 
 
@@ -330,7 +336,13 @@ echo PLEASE WAIT...
 ping 127.0.0.1 -n 5 -w 1000 > NUL
 echo.
 echo EXTRACTED in %UserProfile%\Documents\Drivers
-pause
+set op=%~1
+
+if "%op%"=="" (
+    pause
+) else (
+    echo Y | pause
+)
 goto start
 ::======================================================================================
 
@@ -455,7 +467,13 @@ echo.
 echo Downloaded files to %UserProfile%\Downloads
 echo.
 echo Please run these scripts yourselves at your own risk!!
-pause
+set op=%~1
+
+if "%op%"=="" (
+    pause
+) else (
+    echo Y | pause
+)
 goto start
 ::======================================================================================
 
@@ -1440,7 +1458,13 @@ ping 127.0.0.1 -n 3 -w 1000 > NUL
 del /f %UserProfile%\Desktop\8mpty_script.zip
 echo.
 echo Downloaded files to %UserProfile%\Desktop
-pause
+set op=%~1
+
+if "%op%"=="" (
+    pause
+) else (
+    echo Y | pause
+)
 goto start
 ::======================================================================================
 
