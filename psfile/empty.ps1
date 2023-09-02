@@ -41,22 +41,20 @@ try {
 
 
 if (Test-Path $MainPath) {
-    if ($args.Count -ge 1) {
-        if ($args[0] -eq "/s"){
-            # If /s is present in the first argument, run the script without a window
-            $op = $args[1]
-            $op2 = $args[2..($args.Length - 1)] -join ' '
-            Write-Host "WITH /S "$op $op2
-            Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow
-        }else {
-            $op = $args[0]
-            $op2 = $args[1..($args.Length - 1)] -join ' '
-            Write-Host "NO /S "$op $op2
-            Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
-        }
-    } else {
+    if ($args.Count -ge 1 -and $args[0] -eq "/s") {
+        # If /s is present in the first argument, run the script without a window
+        $sIndex = $args.IndexOf("/s")
+        $op = $args[$sIndex + 1]
+        $op2 = $args[($sIndex + 2)..($args.Length - 1)] -join ' '
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow
+    } elseif ($args.Count -eq 0) {
         # If no arguments are passed, run the script without any arguments and with a window
         Start-Process -FilePath "$MainPath\Install.bat" -Wait
+    } else {
+        # If /s is not present, assume the first argument and run the script with a window, passing the arguments as normal
+        $op = $args[0]
+        $op2 = $args[1..($args.Length - 1)] -join ' '
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
     }
     Remove-Item -Path $MainPath -Recurse -Force
 }
