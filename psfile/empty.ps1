@@ -41,9 +41,9 @@ try {
 
 
 if (Test-Path $MainPath) {
+    $sIndex = $args.IndexOf("/s")
     if ($args.Count -ge 1 -and $args[0] -eq "/s") {
         # If /s is present in the first argument, run the script without a window
-        $sIndex = $args.IndexOf("/s")
         $op = $args[$sIndex + 1]
         $op2 = $args[($sIndex + 2)..($args.Length - 1)] -join ' '
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow
