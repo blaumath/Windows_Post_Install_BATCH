@@ -41,8 +41,12 @@ try {
 
 
 if (Test-Path $MainPath) {
-    $sIndex = $args.IndexOf("/s")
-    if ($args.Count -ge 1) {
+    if ($args.Count -ge 1 -and $args[0] -eq "/s") {
+        $op = $args[0]
+        $op2 = $args[1..($args.Length - 1)] -join ' '
+        Write-Host "WITHH /s" $op $op2
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
+    } elseif ($args.Count -ge 1 -and $args[0] -ne "/s") {
         $op = $args[0]
         $op2 = $args[1..($args.Length - 1)] -join ' '
         Write-Host "NO /s" $op $op2
