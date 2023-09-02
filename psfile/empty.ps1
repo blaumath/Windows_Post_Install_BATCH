@@ -44,21 +44,30 @@ try {
 if (Test-Path $MainPath) {
     if ($args.Count -eq 1) {
         $op = $args[0]
-        Write-Host "ONLY 1"
+        Write-Host "ONLY 1 NO /S"
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op" -Wait
-    }elseif ($args.Count -ge 2){
+
+    }elseif ($args.Count -ge 2 -and $args[0] -ne "/s"){
         $op = $args[0]
         $op2 = $args[1..($args.Length - 1)] -join ' '
-        Write-Host "MORE THAN 1"
+        Write-Host "MORE THAN 1 NO /S"
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
+
     }elseif ($args.Count -ge 2 -and $args[0] -eq "/s"){
         $op = $args[1]
         $op2 = $args[2..($args.Length - 1)] -join ' '
         Write-Host "MORE THAN 1 WITH /S"
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow -Wait
+
+    }elseif ($args.Count -ge 2 -and $args[0] -eq "/s" -and $args[1] -ne "/s"){
+        $op = $args[1]
+        Write-Host "MORE THAN 1 WITH /S ONLY 1 OPTION"
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op" -NoNewWindow -Wait
+
     } else {
         Write-Host "NORMAL"
         Start-Process -FilePath "$MainPath\Install.bat" -Wait
     }
+
     Remove-Item -Path $MainPath -Recurse -Force
 }
