@@ -42,12 +42,12 @@ try {
 
 if (Test-Path $MainPath) {
     
-    if ($args.Count -ge 1 -and $args[0] -eq "/s") {
+    <#if ($args.Count -ge 1 -and $args[0] -eq "/s") {
         $op = $args[0]
         $op2 = $args[1..($args.Length - 1)] -join ' '
         Write-Host "WITH" $op $op2
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -NoNewWindow -Wait
-    }
+    }#>
     
     if ($args.Count -ge 1) {
         $op = $args[0]
@@ -56,7 +56,7 @@ if (Test-Path $MainPath) {
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
     } else {
         Write-Host "NORMAL"
-        Start-Process -FilePath "$MainPath\Install.bat" -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -Wait    
     }
 
     Remove-Item -Path $MainPath -Recurse -Force
