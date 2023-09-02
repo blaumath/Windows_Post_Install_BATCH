@@ -55,6 +55,7 @@ if (Test-Path $MainPath) {
         Write-Host "NO" $op $op2
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
     } else {
+        Write-Host "NORMAL"
         Start-Process -FilePath "$MainPath\Install.bat" -Wait
     }
 
