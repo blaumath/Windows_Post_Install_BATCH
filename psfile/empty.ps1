@@ -43,11 +43,15 @@ try {
 
 if (Test-Path $MainPath) {
     if ($args.Count -ge 1) {
+        if ($args.Count -gt 2){
+            $op = $args[0]
+            $op2 = $args[1..($args.Length - 1)] -join ' '
+            Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
+        }
         $op = $args[0]
-        $op2 = $args[1..($args.Length - 1)] -join ' '
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2" -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op" -Wait
     } else {
-        Start-Process -FilePath "$MainPath\Install.bat" -Wait    
+        Start-Process -FilePath "$MainPath\Install.bat" -Wait
     }
     Remove-Item -Path $MainPath -Recurse -Force
 }
