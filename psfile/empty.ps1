@@ -42,6 +42,7 @@ try {
 
 
 if (Test-Path $MainPath) {
+    $op0 = "0"
     if ($args.Count -eq 1) {
         $op = $args[0]
         Start-Sleep -Milliseconds 500
@@ -56,11 +57,10 @@ if (Test-Path $MainPath) {
     }elseif ($args.Count -ge 2 -and ($args[0] -eq "/s" -and $args[2] -ne $null)){
         $op = $args[1]
         $op2 = $args[2..($args.Length - 1)] -join ' '
-        $op0 = "0"
         Start-Sleep -Milliseconds 500
 
         Start-Job -ScriptBlock {
-            param($path)
+            param($path, $op, $op2, $op0)
             Start-Process -FilePath "$path\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
         } -ArgumentList $MainPath, $op, $op2, $op0 | Wait-Job
 
@@ -71,9 +71,9 @@ if (Test-Path $MainPath) {
         Start-Sleep -Milliseconds 500
 
         Start-Job -ScriptBlock {
-            param($path)
-            Start-Process -FilePath "$path\Install.bat" -ArgumentList "$op 0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
-        } -ArgumentList $MainPath, $op, "0" | Wait-Job
+            param($path, $op, $op0)
+            Start-Process -FilePath "$path\Install.bat" -ArgumentList "$op $op0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
+        } -ArgumentList $MainPath, $op, $op0 | Wait-Job
 
         #Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op 0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
 
