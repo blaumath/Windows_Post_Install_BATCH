@@ -63,16 +63,17 @@ if (Test-Path $MainPath) {
         Start-Sleep -Milliseconds 500
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput $Logs -RedirectStandardError $ELogs -Wait
         Get-Content $Logs, $ELogs | Out-File $FinalLogs -Append
+        Remove-Item -Path $Logs, $ELogs -Recurse -Force
 
     }elseif (($args.Count -ge 2 -and $args.Count -lt 3) -and ($args[0] -eq "/s" -and $args[1] -ne "/s")){
         $op = $args[1]
         Start-Sleep -Milliseconds 500
         Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op0" -NoNewWindow -RedirectStandardOutput $Logs -RedirectStandardError $ELogs -Wait
         Get-Content $Logs, $ELogs | Out-File $FinalLogs -Append
+        Remove-Item -Path $Logs, $ELogs -Recurse -Force
     } else {
         Start-Sleep -Milliseconds 500
         Start-Process -FilePath "$MainPath\Install.bat" -Wait
     }
-    Remove-Item -Path $Logs, $ELogs -Recurse -Force
     Remove-Item -Path $MainPath -Recurse -Force
 }
