@@ -61,7 +61,7 @@ if (Test-Path $MainPath) {
 
         Start-Job -ScriptBlock {
             param($path, $op, $op2, $op0)
-            Start-Process -FilePath "$path\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
+            Start-Process -FilePath "$path\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput "$env:TEMP\Logs.txt" -RedirectStandardError "$env:TEMP\ELogs.txt" -Wait
         } -ArgumentList $MainPath, $op, $op2, $op0 | Wait-Job
 
         # Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
@@ -72,7 +72,7 @@ if (Test-Path $MainPath) {
 
         Start-Job -ScriptBlock {
             param($path, $op, $op0)
-            Start-Process -FilePath "$path\Install.bat" -ArgumentList "$op $op0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
+            Start-Process -FilePath "$path\Install.bat" -ArgumentList "$op $op0" -NoNewWindow -RedirectStandardOutput "$env:TEMP\Logs.txt" -RedirectStandardError "$env:TEMP\ELogs.txt" -Wait
         } -ArgumentList $MainPath, $op, $op0 | Wait-Job
 
         #Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op 0" -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NULL" -Wait
