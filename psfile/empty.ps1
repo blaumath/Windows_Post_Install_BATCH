@@ -43,6 +43,9 @@ try {
 
 if (Test-Path $MainPath) {
     $op0 = "0"
+    $Logs = "$env:TEMP\Post_Logs.txt"
+    $ELogs = "$env:TEMP\Post_ELogs.txt"
+    $FinalLogs = "$env:TEMP\Post_Final_Logs.txt"
     if ($args.Count -eq 1) {
         $op = $args[0]
         Start-Sleep -Milliseconds 500
@@ -58,13 +61,14 @@ if (Test-Path $MainPath) {
         $op = $args[1]
         $op2 = $args[2..($args.Length - 1)] -join ' '
         Start-Sleep -Milliseconds 500
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput "$env:TEMP\Post_Logs.txt" -RedirectStandardError "$env:TEMP\Post_ELogs.txt" -Wait
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op2 $op0" -NoNewWindow -RedirectStandardOutput $Logs -RedirectStandardError $ELogs -Wait
+        Get-Content $Logs, $ELogs | Out-File $FinalLogs -Append | Remove-Item -Path $Logs -Recurse -Force | Remove-Item -Path $ELogs -Recurse -Force
 
     }elseif (($args.Count -ge 2 -and $args.Count -lt 3) -and ($args[0] -eq "/s" -and $args[1] -ne "/s")){
         $op = $args[1]
         Start-Sleep -Milliseconds 500
-        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op0" -NoNewWindow -RedirectStandardOutput "$env:TEMP\Post_Logs.txt" -RedirectStandardError "$env:TEMP\Post_ELogs.txt" -Wait
-
+        Start-Process -FilePath "$MainPath\Install.bat" -ArgumentList "$op $op0" -NoNewWindow -RedirectStandardOutput $Logs -RedirectStandardError $ELogs -Wait
+        Get-Content $Logs, $ELogs | Out-File $FinalLogs -Append | Remove-Item -Path $Logs -Recurse -Force | Remove-Item -Path $ELogs -Recurse -Force
     } else {
         Start-Sleep -Milliseconds 500
         Start-Process -FilePath "$MainPath\Install.bat" -Wait
