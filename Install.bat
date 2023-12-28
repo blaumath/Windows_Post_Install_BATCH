@@ -1,12 +1,16 @@
+@echo off
+rem CenterSelf
 mode 67, 30
+
 CLS
-echo.
-echo =============================
-echo Running Admin shell
-echo =============================
+ ECHO.
+ ECHO =============================
+ ECHO Running Admin shell
+ ECHO =============================
 
 :init
-set "cmdInvoke=1"
+ setlocal DisableDelayedExpansion
+ set cmdInvoke=1
  set winSysFolder=System32
  set "batchPath=%~dpnx0"
  rem this works also from cmd shell, other than %~0
@@ -1468,4 +1472,4 @@ goto start
 :end
 cls
 exit /b
-::======================================================================================
+::===================================================================================
