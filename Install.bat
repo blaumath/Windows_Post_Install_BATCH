@@ -1,16 +1,12 @@
-@echo off
-rem CenterSelf
 mode 67, 30
-
 CLS
- ECHO.
- ECHO =============================
- ECHO Running Admin shell
- ECHO =============================
+echo.
+echo =============================
+echo Running Admin shell
+echo =============================
 
 :init
- setlocal DisableDelayedExpansion
- set cmdInvoke=1
+set "cmdInvoke=1"
  set winSysFolder=System32
  set "batchPath=%~dpnx0"
  rem this works also from cmd shell, other than %~0
